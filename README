@@ -7,4 +7,8 @@ To use this:
   ./Allwmake
 
 Notes:
-* The files on the folder "utilities/exe" are static binaries. I don't know where the original source code is.
+  * The files on the folder "utilities/exe" are static binaries. I don't know where the original source code is.
+  * On Ubuntu, install GSL by simply running:
+     sudo apt-get install gsl-bin libgsl0-dev
+  * Or if you want to build your own GSL, edit the file "Allwmake" and change the path "$HOME/gsl" to your own installation path of GSL.
+     export GSL_INST_DIR="$HOME/gsl"
