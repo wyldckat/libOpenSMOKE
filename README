@@ -1,0 +1,7 @@
+Original source code retrieved from: http://creckmodeling.chem.polimi.it/openfoam.html
+
+To use this:
+
+  git clone https://github.com/wyldckat/libOpenSMOKE.git
+  cd libOpenSMOKE
+  ./Allwmake
