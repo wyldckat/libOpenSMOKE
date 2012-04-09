@@ -48,4 +48,65 @@ Foam::basicPdfThermo::~basicPdfThermo()
 {}
 
 
+// Virtual stuff
+Foam::volScalarField& Foam::basicPdfThermo::csi()
+{
+    notImplemented("basicPdfThermo::csi()");
+    return const_cast<volScalarField&>(volScalarField::null());
+}
+
+const Foam::volScalarField& Foam::basicPdfThermo::csi() const
+{
+    notImplemented("basicPdfThermo::csi() const");
+    return volScalarField::null();
+}
+
+Foam::volScalarField& Foam::basicPdfThermo::csiv2()
+{
+    notImplemented("basicPdfThermo::csiv2()");
+    return const_cast<volScalarField&>(volScalarField::null());
+}
+
+const Foam::volScalarField& Foam::basicPdfThermo::csiv2() const
+{
+    notImplemented("basicPdfThermo::csiv2() const");
+    return volScalarField::null();
+}
+
+Foam::volScalarField& Foam::basicPdfThermo::chi_st()
+{
+    notImplemented("basicPdfThermo::chi_st()");
+    return const_cast<volScalarField&>(volScalarField::null());
+}
+
+const Foam::volScalarField& Foam::basicPdfThermo::chi_st() const
+{
+    notImplemented("basicPdfThermo::chi_st() const");
+    return volScalarField::null();
+}
+
+Foam::volScalarField& Foam::basicPdfThermo::H()
+{
+    notImplemented("basicPdfThermo::H()");
+    return const_cast<volScalarField&>(volScalarField::null());
+}
+
+const Foam::volScalarField& Foam::basicPdfThermo::H() const
+{
+    notImplemented("basicPdfThermo::H() const");
+    return volScalarField::null();
+}
+
+Foam::volScalarField& Foam::basicPdfThermo::as()
+{
+    notImplemented("basicPdfThermo::as()");
+    return const_cast<volScalarField&>(volScalarField::null());
+}
+
+const Foam::volScalarField& Foam::basicPdfThermo::as() const
+{
+    notImplemented("basicPdfThermo::as() const");
+    return volScalarField::null();
+}
+
 // ************************************************************************* //

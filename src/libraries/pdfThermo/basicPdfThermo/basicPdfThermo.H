@@ -36,6 +36,7 @@ SourceFiles
 #ifndef basicPdfThermo_H
 #define basicPdfThermo_H
 
+#include "volFields.H"
 #include "basicThermo.H"
 #include "runTimeSelectionTables.H"
 
@@ -92,6 +93,22 @@ public:
 
     // Member functions
 
+        // Virtual stuff
+        virtual volScalarField& csi();
+        virtual const volScalarField& csi() const;
+
+        virtual volScalarField& csiv2();
+        virtual const volScalarField& csiv2() const;
+
+        virtual volScalarField& chi_st();
+        virtual const volScalarField& chi_st() const;
+
+        virtual volScalarField& H();
+        virtual const volScalarField& H() const;
+
+        virtual volScalarField& as();
+        virtual const volScalarField& as() const;
+    
         // Fields derived from thermodynamic state variables
 
             //- Density [kg/m^3] - uses current value of pressure
