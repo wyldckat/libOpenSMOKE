@@ -1,8 +1,8 @@
 #!/bin/sh
 set -x
 
-wclean common
-wclean flamelets
-wclean twoequations
-wclean qmom
-wclean pdfThermo
+wclean libso common
+wclean libso flamelets
+wclean libso twoequations
+wclean libso qmom
+wclean libso pdfThermo
