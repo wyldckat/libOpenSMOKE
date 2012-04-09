@@ -1,19 +1,20 @@
 EXE_INC = \
+    -I$(realpath ../../libraries/common/lnInclude) \
+    -I$(realpath ../../libraries/flamelets/lnInclude) \
+    -I$(realpath ../../libraries/pdfThermo/lnInclude) \
     -I$(LIB_SRC)/thermophysicalModels/basic/lnInclude \
     -I$(LIB_SRC)/turbulenceModels \
     -I$(LIB_SRC)/turbulenceModels/compressible/RAS/RASModel \
     -I$(LIB_SRC)/finiteVolume/cfdTools \
     -I$(LIB_SRC)/finiteVolume/lnInclude \
-    -I$(realpath ../../src/libraries/common/lnInclude) \
-    -I$(realpath ../../src/libraries/flamelets/lnInclude) \
-    -I$(realpath ../../src/libraries/pdfThermo/lnInclude) \
     -I$(GSL_INST_DIR)/include
 
 EXE_LIBS = \
     -L$(GSL_INST_DIR)/lib \
+    -L$(FOAM_USER_LIBBIN) \
+    -lOpenSMOKE_pdfThermo \
     -lOpenSMOKE_common \
     -lOpenSMOKE_flamelets \
-    -lOpenSMOKE_pdfThermo \
     -lbasicThermophysicalModels \
     -lspecie \
     -lcompressibleRASModels \
