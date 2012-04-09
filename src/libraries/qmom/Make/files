@@ -1,7 +1,6 @@
-QMOM  		= src
+QMOM = src
 
 $(QMOM)/OpenSMOKE_QMOM_EmpiricalModels.cpp
 $(QMOM)/OpenSMOKE_QMOM_GordonAlgorithm.cpp
 
-LIB = $(FOAM_INST_DIR)/libOpenSMOKE/lib/libOpenSMOKE_qmom
-
+LIB = $(FOAM_USER_LIBBIN)/libOpenSMOKE_qmom

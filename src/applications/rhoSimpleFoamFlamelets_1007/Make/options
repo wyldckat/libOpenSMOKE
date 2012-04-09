@@ -4,13 +4,13 @@ EXE_INC = \
     -I$(LIB_SRC)/turbulenceModels/compressible/RAS/RASModel \
     -I$(LIB_SRC)/finiteVolume/cfdTools \
     -I$(LIB_SRC)/finiteVolume/lnInclude \
-    -I$(FOAM_INST_DIR)/libOpenSMOKE/src/libraries/common/lnInclude \
-    -I$(FOAM_INST_DIR)/libOpenSMOKE/src/libraries/flamelets/lnInclude \
-    -I$(FOAM_INST_DIR)/libOpenSMOKE/src/libraries/pdfThermo/lnInclude \
-    -I$(HOME)/NumericalLibraries/gsl/include
+    -I$(realpath ../../src/libraries/common/lnInclude) \
+    -I$(realpath ../../src/libraries/flamelets/lnInclude) \
+    -I$(realpath ../../src/libraries/pdfThermo/lnInclude) \
+    -I$(GSL_INST_DIR)/include
 
 EXE_LIBS = \
-    -L/home/cuoci/NumericalLibraries/gsl/lib \
+    -L$(GSL_INST_DIR)/lib \
     -lOpenSMOKE_common \
     -lOpenSMOKE_flamelets \
     -lOpenSMOKE_pdfThermo \
@@ -21,4 +21,3 @@ EXE_LIBS = \
     -lmeshTools \
     -lgsl \
     -lgslcblas 
-

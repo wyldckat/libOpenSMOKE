@@ -1,0 +1,12 @@
+#!/bin/sh
+
+cd ${0%/*} || exit 1    # run from this directory
+
+if [ -z "$WM_PROJECT_DIR" ]; then
+  echo "OpenFOAM environment is not active."
+fi
+
+export GSL_INST_DIR="$HOME/gsl"
+
+wmake all libraries
+wmake all applications
