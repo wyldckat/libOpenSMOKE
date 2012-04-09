@@ -6,7 +6,12 @@ if [ -z "$WM_PROJECT_DIR" ]; then
   echo "OpenFOAM environment is not active."
 fi
 
+#On Ubuntu, install GSL by simply running:
+#   sudo apt-get install gsl-bin libgsl0-dev
+
+#You can adjust this as you wish or leave it untouched.
 export GSL_INST_DIR="$HOME/gsl"
 
+cd src
 wmake all libraries
 wmake all applications
