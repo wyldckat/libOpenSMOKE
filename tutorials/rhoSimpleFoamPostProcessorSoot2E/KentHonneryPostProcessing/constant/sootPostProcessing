@@ -1,0 +1,41 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  1.6                                   |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      binary;
+    class       dictionary;
+    location    "constant";
+    object      sootPostProcessing;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+	// Equation constants
+	sigmat 		0.85;
+
+	// Update soot source terms (number of iterations)
+	sootUpdate 	5;
+
+	// Soot integration
+	sootRobust 	on;
+
+	// Turbulent fluctuations
+	sootClosure		"Mean";
+
+	// Soot models
+	nucleationModel		"Liu_2002";
+	growthModel		"Liu_2002";
+	oxidationModel		"NSC";
+	aggregationModel	"Smoluchowski";
+
+	// Soot library (uncorrelated closure)
+	libraryPath		"PDF-Library-Soot";
+
+	
+// ************************************************************************* //
+

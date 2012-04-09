@@ -1,0 +1,3 @@
+SOURCE = \
+$(QMOM)/OpenSMOKE_QMOM_EmpiricalModels.cpp\
+$(QMOM)/OpenSMOKE_QMOM_GordonAlgorithm.cpp

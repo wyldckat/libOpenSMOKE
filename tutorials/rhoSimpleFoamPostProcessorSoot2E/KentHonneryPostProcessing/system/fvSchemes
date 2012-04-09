@@ -1,0 +1,83 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  1.5                                   |
+|   \\  /    A nd           | Web:      http://www.OpenFOAM.org               |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      fvSchemes;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  1.5                                   |
+|   \\  /    A nd           | Web:      http://www.OpenFOAM.org               |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      fvSchemes;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+ddtSchemes
+{
+    default steadyState;
+}
+
+gradSchemes
+{
+    default         none;
+	
+    grad(p)         Gauss linear;
+    grad(U)         Gauss linear;
+    grad(phiN)      Gauss linear;    
+    grad(phiM)      Gauss linear; 
+}
+
+divSchemes
+{
+    default          none;
+
+    div(phi,U)      				Gauss limitedLinearV 1;
+    div(phiU,p)     				Gauss limitedLinear 1;
+    div(phi,phiN) 				Gauss limitedLinear 1;
+    div(phi,phiM) 				Gauss limitedLinear 1;
+    div((muEff*dev2(grad(U).T()))) 		Gauss linear;
+
+}
+
+laplacianSchemes
+{
+    default                 		none;
+
+    laplacian(muEff,U)			Gauss linear uncorrected; 
+    laplacian((rho|A(U)),p)     	Gauss linear uncorrected;   
+    laplacian((mut|sigmat),phiN)   	Gauss linear uncorrected;     
+    laplacian((mut|sigmat),phiM) 	Gauss linear uncorrected;   
+}
+
+interpolationSchemes
+{
+    default                 none;
+    interpolate(rho)        linear;
+    interpolate((rho*U))    linear;
+}
+
+fluxRequired
+{
+    p;
+}
+
+// ************************************************************************* //
+

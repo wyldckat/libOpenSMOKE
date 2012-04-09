@@ -1,0 +1,7 @@
+#!/bin/sh
+set -x
+
+wmake rhoSimpleFoamFlamelets_1007
+wmake rhoSimpleFoamPostProcessorSoot2E_1007
+
+

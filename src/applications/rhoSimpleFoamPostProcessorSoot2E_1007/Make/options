@@ -1,0 +1,26 @@
+EXE_INC = \
+    -I$(LIB_SRC)/thermophysicalModels/basic/lnInclude \
+    -I$(LIB_SRC)/turbulenceModels \
+    -I$(LIB_SRC)/turbulenceModels/compressible/RAS/RASModel \
+    -I$(LIB_SRC)/finiteVolume/cfdTools \
+    -I$(LIB_SRC)/finiteVolume/lnInclude \
+    -I$(FOAM_INST_DIR)/libOpenSMOKE/src/libraries/common/lnInclude \
+    -I$(FOAM_INST_DIR)/libOpenSMOKE/src/libraries/flamelets/lnInclude \
+    -I$(FOAM_INST_DIR)/libOpenSMOKE/src/libraries/pdfThermo/lnInclude \
+    -I$(FOAM_INST_DIR)/libOpenSMOKE/src/libraries/twoequations/lnInclude \
+    -I$(HOME)/NumericalLibraries/gsl/include
+
+EXE_LIBS = \
+    -L/home/cuoci/NumericalLibraries/gsl/lib \
+    -lOpenSMOKE_common \
+    -lOpenSMOKE_flamelets \
+    -lOpenSMOKE_pdfThermo \
+    -lOpenSMOKE_twoequations \
+    -lbasicThermophysicalModels \
+    -lspecie \
+    -lcompressibleRASModels \
+    -lfiniteVolume \
+    -lmeshTools \
+    -lgsl \
+    -lgslcblas 
+

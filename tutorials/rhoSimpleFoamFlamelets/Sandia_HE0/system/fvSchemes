@@ -1,0 +1,75 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  1.5                                   |
+|   \\  /    A nd           | Web:      http://www.OpenFOAM.org               |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      fvSchemes;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+ddtSchemes
+{
+    default steadyState;
+}
+
+gradSchemes
+{
+    default         none;
+	
+    grad(p)         Gauss linear;
+    grad(U)         Gauss linear;
+    grad(csi)       Gauss linear;    
+    grad(csiv2)     Gauss linear; 
+    grad(H)	    Gauss linear; 
+    grad(epsilon)   Gauss linear;  
+    grad(k)	    Gauss linear;      
+}
+
+divSchemes
+{
+    default          none;
+
+    div(phi,U)      				Gauss limitedLinearV 1;
+    div(phiU,p)     				Gauss limitedLinear 1;
+    div(phi,epsilon) 				Gauss limitedLinear 1;
+    div(phi,k) 					Gauss limitedLinear 1;
+    div(phi,H) 					Gauss limitedLinear 1;
+    div(phi,csi)   				Gauss limitedLinear01 1.00;
+    div(phi,csiv2)  				Gauss limitedLinear01 0.25;
+    div((muEff*dev2(grad(U).T()))) 		Gauss linear;
+
+}
+
+laplacianSchemes
+{
+    default                 		none;
+
+    laplacian(muEff,U)			Gauss linear uncorrected; 
+    laplacian((mut|sigmat),csi)   	Gauss linear uncorrected;     
+    laplacian((mut|sigmat),csiv2) 	Gauss linear uncorrected;   
+    laplacian((rho|A(U)),p)     	Gauss linear uncorrected;   
+    laplacian(DepsilonEff,epsilon)  	Gauss linear uncorrected;
+    laplacian(DkEff,k)              	Gauss linear uncorrected;
+    laplacian((mut|sigmat),H)		Gauss linear uncorrected;
+}
+
+interpolationSchemes
+{
+    default                 none;
+    interpolate(rho)        linear;
+    interpolate((rho*U))    linear;
+}
+
+fluxRequired
+{
+    p;
+}
+
+// ************************************************************************* //

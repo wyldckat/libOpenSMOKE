@@ -1,0 +1,4 @@
+DEPENDENCIES = \
+basicPdfThermo/basicPdfThermo.dep\
+basicPdfThermo/newBasicPdfThermo.dep\
+hPdfThermo/hPdfThermos.dep

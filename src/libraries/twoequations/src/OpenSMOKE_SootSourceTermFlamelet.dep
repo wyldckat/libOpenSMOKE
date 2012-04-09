@@ -1,0 +1,7 @@
+$(OBJECTS_DIR)/OpenSMOKE_SootSourceTermFlamelet.o: src/OpenSMOKE_SootSourceTermFlamelet.dep
+src/OpenSMOKE_SootSourceTermFlamelet.dep: src/OpenSMOKE_SootSourceTermFlamelet.cpp
+src/OpenSMOKE_SootSourceTermFlamelet.dep: src/OpenSMOKE_SootSourceTermFlamelet.h
+$(OBJECTS_DIR)/OpenSMOKE_SootSourceTermFlamelet.o: $(EXE_DEP)
+$(OBJECTS_DIR)/OpenSMOKE_SootSourceTermFlamelet.o:
+	@SOURCE_DIR=src
+	SOURCE=src/OpenSMOKE_SootSourceTermFlamelet.cpp ; $(cpptoo)

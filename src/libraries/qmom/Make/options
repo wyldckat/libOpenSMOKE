@@ -1,0 +1,3 @@
+EXE_INC = \
+    -I$(FOAM_INST_DIR)/libOpenSMOKE/src/libraries/common/lnInclude   \
+    -I$(HOME)/NumericalLibraries/gsl/include  

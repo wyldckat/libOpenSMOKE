@@ -1,0 +1,5 @@
+#!/bin/sh
+set -x
+
+wclean rhoSimpleFoamFlamelets_1007
+wclean rhoSimpleFoamPostProcessorSoot2E_1007

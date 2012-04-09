@@ -1,0 +1,4 @@
+rhoSimpleFoam_flamelets.C
+
+
+EXE = $(FOAM_USER_APPBIN)/rhoSimpleFoamFlamelets_1007

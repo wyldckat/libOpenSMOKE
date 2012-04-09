@@ -1,0 +1,26 @@
+// ----------------------------------------------------	//
+//		LookUpTable				//
+// ----------------------------------------------------	//
+
+	#Pdf BETA
+	
+	#ListOfFlamelets	
+				../Step01/Flamelet-0/Flamelet_1e-06_Hz.out
+				../Step01/Flamelet-0/Flamelet_0.0001_Hz.out
+				../Step01/Flamelet-0/Flamelet_0.01_Hz.out
+				../Step01/Flamelet-0/Flamelet_0.1_Hz.out
+				../Step01/Flamelet-0/Flamelet_1_Hz.out
+				../Step01/Flamelet-0/Flamelet_5_Hz.out
+				../Step01/Flamelet-0/Flamelet_10_Hz.out
+				../Step01/Flamelet-0/Flamelet_20_Hz.out
+				../Step01/Flamelet-0/Flamelet_40_Hz.out
+				../Step01/Flamelet-0/Flamelet_100_Hz.out
+	
+	#FlameletLibrary	PDF-0.fla
+	#LookUpTable		PDF-0.lib
+	#LookUpTableOpenFOAM	PDF-0
+	
+	#NumberOfVariances	32
+	#StretchingFactor	1.17 
+
+#END

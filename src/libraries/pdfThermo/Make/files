@@ -1,0 +1,5 @@
+basicPdfThermo/basicPdfThermo.C
+basicPdfThermo/newBasicPdfThermo.C
+hPdfThermo/hPdfThermos.C
+
+LIB = $(FOAM_INST_DIR)/libOpenSMOKE/lib/libOpenSMOKE_pdfThermo

@@ -1,0 +1,8 @@
+#!/bin/sh
+set -x
+
+wclean common
+wclean flamelets
+wclean twoequations
+wclean qmom
+wclean pdfThermo

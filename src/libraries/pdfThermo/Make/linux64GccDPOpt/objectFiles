@@ -1,0 +1,4 @@
+OBJECTS = \
+$(OBJECTS_DIR)/basicPdfThermo.o\
+$(OBJECTS_DIR)/newBasicPdfThermo.o\
+$(OBJECTS_DIR)/hPdfThermos.o

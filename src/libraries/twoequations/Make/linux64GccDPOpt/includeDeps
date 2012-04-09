@@ -1,0 +1,4 @@
+include $(TwoEquations)/OpenSMOKE_SootEmpiricalModels.dep
+include $(TwoEquations)/OpenSMOKE_SootSourceTermFlamelet.dep
+include $(TwoEquations)/OpenSMOKE_SootSourceTermFlameletLibrary.dep
+include $(TwoEquations)/OpenSMOKE_SootSourceTermLibrary.dep

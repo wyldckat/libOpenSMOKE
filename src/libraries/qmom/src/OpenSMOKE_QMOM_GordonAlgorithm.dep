@@ -1,0 +1,8 @@
+$(OBJECTS_DIR)/OpenSMOKE_QMOM_GordonAlgorithm.o: src/OpenSMOKE_QMOM_GordonAlgorithm.dep
+src/OpenSMOKE_QMOM_GordonAlgorithm.dep: src/OpenSMOKE_QMOM_GordonAlgorithm.cpp
+src/OpenSMOKE_QMOM_GordonAlgorithm.dep: src/OpenSMOKE_QMOM_GordonAlgorithm.h
+src/OpenSMOKE_QMOM_GordonAlgorithm.dep: /home/cuoci/NumericalLibraries/gsl/include/gsl/gsl_eigen.h
+$(OBJECTS_DIR)/OpenSMOKE_QMOM_GordonAlgorithm.o: $(EXE_DEP)
+$(OBJECTS_DIR)/OpenSMOKE_QMOM_GordonAlgorithm.o:
+	@SOURCE_DIR=src
+	SOURCE=src/OpenSMOKE_QMOM_GordonAlgorithm.cpp ; $(cpptoo)

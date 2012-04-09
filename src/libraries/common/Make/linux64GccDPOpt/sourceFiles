@@ -1,0 +1,3 @@
+SOURCE = \
+$(Common)/OpenSMOKE_ChiDistribution.cpp\
+$(Common)/OpenSMOKE_External_Functions.cpp

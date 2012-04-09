@@ -1,0 +1,3 @@
+LOCAL_OBJECTS = \
+OpenSMOKE_ChiDistribution.o\
+OpenSMOKE_External_Functions.o

@@ -1,0 +1,2 @@
+LOCAL_OBJECTS = \
+rhoSimpleFoamPostProcessorSoot2E.o

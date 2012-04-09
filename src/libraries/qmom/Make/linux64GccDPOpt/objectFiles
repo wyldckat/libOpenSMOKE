@@ -1,0 +1,3 @@
+OBJECTS = \
+$(OBJECTS_DIR)/OpenSMOKE_QMOM_EmpiricalModels.o\
+$(OBJECTS_DIR)/OpenSMOKE_QMOM_GordonAlgorithm.o

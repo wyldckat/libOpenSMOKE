@@ -1,0 +1,8 @@
+$(OBJECTS_DIR)/OpenSMOKE_SootEmpiricalModels.o: src/OpenSMOKE_SootEmpiricalModels.dep
+src/OpenSMOKE_SootEmpiricalModels.dep: src/OpenSMOKE_SootEmpiricalModels.cpp
+src/OpenSMOKE_SootEmpiricalModels.dep: src/OpenSMOKE_SootEmpiricalModels.h
+src/OpenSMOKE_SootEmpiricalModels.dep: /home/cuoci/OpenFOAM/libOpenSMOKE/src/libraries/common/lnInclude/OpenSMOKE_External_Functions.hpp
+$(OBJECTS_DIR)/OpenSMOKE_SootEmpiricalModels.o: $(EXE_DEP)
+$(OBJECTS_DIR)/OpenSMOKE_SootEmpiricalModels.o:
+	@SOURCE_DIR=src
+	SOURCE=src/OpenSMOKE_SootEmpiricalModels.cpp ; $(cpptoo)

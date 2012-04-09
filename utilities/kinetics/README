@@ -1,0 +1,9 @@
+In CHEMKIN folder several kinetics schemes (together with thermodynamic and transport properties) are available in CHEMKIN format. To be used in OpenFOAM they must be preprocessed using the OpenSMOKE_CHEMKINInterpreter.sh utility. The pre-processing can be performed running the Run.sh file in each folder.
+
+In PreProcessed folder the preprocessed versions of kinetic schemes in CHEMKIN folder are available. 
+
+Additional kinetic mechanisms can be found at the following web address in CHEMKIN format:
+
+http://creckmodeling.chem.polimi.it/
+
+

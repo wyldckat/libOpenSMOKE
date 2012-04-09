@@ -1,0 +1,104 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  1.5                                   |
+|   \\  /    A nd           | Web:      http://www.OpenFOAM.org               |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      fvSolution;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+solvers
+{
+    rho
+    {
+        solver          PCG;
+        preconditioner  DIC;
+        tolerance       1e-07;
+        relTol          0;
+    }
+
+    U
+    {
+        solver          PBiCG;
+        preconditioner  DILU;
+        tolerance       1e-07;
+        relTol          0;
+    }
+
+    p
+    {
+        solver          PCG;
+        preconditioner  DIC;
+        tolerance       1e-08;
+        relTol          0.01;
+    }
+
+    csi
+    {
+	solver		 PBiCG;
+        preconditioner   DILU;
+        tolerance        1e-08;
+        relTol           0.;
+    }
+
+    csiv2
+    {
+	solver		 PBiCG;
+        preconditioner   DILU;
+        tolerance        1e-08;
+        relTol           0.;
+    }
+
+    H
+    {
+	solver		 PBiCG;
+        preconditioner   DILU;
+        tolerance        1e-08;
+        relTol           0.;
+    }
+
+    k
+    {
+	solver		 PBiCG;
+        preconditioner   DILU;
+        tolerance        1e-08;
+        relTol           0.;
+    }
+
+    epsilon 
+    {
+	solver		 PBiCG;
+        preconditioner   DILU;
+        tolerance        1e-08;
+        relTol           0.;
+    }
+
+}
+
+
+SIMPLE
+{
+    	nNonOrthogonalCorrectors 0;
+	pMin pMin [1 -1 -2 0 0 0 0]   100;
+}
+
+relaxationFactors
+{
+    p               0.2;
+    U               0.4;
+    k               0.3;
+    epsilon         0.3;
+    H               0.3;
+    csi		    0.3;
+    csiv2           0.1;
+}
+
+// ************************************************************************* //

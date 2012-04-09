@@ -1,0 +1,4 @@
+SOURCE = \
+basicPdfThermo/basicPdfThermo.C\
+basicPdfThermo/newBasicPdfThermo.C\
+hPdfThermo/hPdfThermos.C

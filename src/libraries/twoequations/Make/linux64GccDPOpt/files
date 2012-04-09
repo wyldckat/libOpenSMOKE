@@ -1,0 +1,12 @@
+# 1 "files"
+# 1 "<built-in>"
+# 1 "<command-line>"
+# 1 "files"
+TwoEquations 	= src
+
+$(TwoEquations)/OpenSMOKE_SootEmpiricalModels.cpp
+$(TwoEquations)/OpenSMOKE_SootSourceTermFlamelet.cpp
+$(TwoEquations)/OpenSMOKE_SootSourceTermFlameletLibrary.cpp
+$(TwoEquations)/OpenSMOKE_SootSourceTermLibrary.cpp
+
+LIB = $(FOAM_INST_DIR)/libOpenSMOKE/lib/libOpenSMOKE_twoequations

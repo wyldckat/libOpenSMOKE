@@ -1,0 +1,10 @@
+# 1 "options"
+# 1 "<built-in>"
+# 1 "<command-line>"
+# 1 "options"
+EXE_INC =     -I$(FOAM_INST_DIR)/libOpenSMOKE/src/libraries/common/lnInclude
+
+
+
+
+

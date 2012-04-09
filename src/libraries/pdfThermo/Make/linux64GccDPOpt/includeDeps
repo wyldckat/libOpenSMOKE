@@ -1,0 +1,3 @@
+include basicPdfThermo/basicPdfThermo.dep
+include basicPdfThermo/newBasicPdfThermo.dep
+include hPdfThermo/hPdfThermos.dep

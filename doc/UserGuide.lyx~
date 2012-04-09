@@ -1,0 +1,6913 @@
+#LyX 1.6.5 created this file. For more info see http://www.lyx.org/
+\lyxformat 345
+\begin_document
+\begin_header
+\textclass scrreprt
+\begin_preamble
+\usepackage{dirtree} % part of the hyperref bundle
+\end_preamble
+\use_default_options true
+\language english
+\inputencoding auto
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_amsmath 1
+\use_esint 1
+\cite_engine basic
+\use_bibtopic false
+\paperorientation portrait
+\secnumdepth 2
+\tocdepth 2
+\paragraph_separation indent
+\defskip medskip
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\author "" 
+\author "" 
+\end_header
+
+\begin_body
+
+\begin_layout Title
+libOpenSMOKE
+\end_layout
+
+\begin_layout Author
+Alberto Cuoci, Alessio Frassoldati, Tiziano Faravelli, Eliseo Ranzi
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+libOpenSMOKE
+\end_layout
+
+\begin_layout Standard
+
+\family sans
+libOpenSMOKE
+\family roman
+ is a set of additional libraries and solvers for 
+\family sans
+OpenFOAM-1.7
+\family roman
+, specifically conceived to manage reacting flows with complex chemistry.
+ In particular, the current 0.1 version implements the following steady-state
+ and unsteady solvers for turbulent flame simulations:
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+
+\family sans
+rhoSimpleFoamFlamelets:
+\family default
+ a steady-state solver (based on the 
+\family sans
+rhoSimpleFoam
+\family default
+ solver) for turbulent non premixed flames using the steady-state, laminar
+ flamelet approach to manage interactions between chemistry and turbulence;
+ look-up tables are generated using specific applications (see in the following)
+, whose binaries are freely distributed with this library
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+
+\family sans
+rhoPisoFoamFlamelets:
+\family default
+ the unsteady version (based on the 
+\family sans
+rhoPisoFoam
+\family default
+ solver) of 
+\family sans
+rhoSimpleFoamFlamelets
+\family default
+ solver
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+
+\family sans
+rhoSimpleFoamPostProcessorSoot2E:
+\family default
+ a kinetic post-processor for evaluating formation of soot in steady-state,
+ turbulent flames, based on the Method of Moments (soot particle number
+ density and soot volume fraction are transported)
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+
+\family sans
+rhoSimpleFoamPostProcessorSootQMOM:
+\family default
+ a kinetic post-processor for evaluating formation of soot in steady-state,
+ turbulent flames, based on the Quadrature Method of Moments (QMOM).
+ Currently, the
+\family sans
+ rhoSimpleFoamPostProcessorSootQMOM
+\family default
+ is under testing and validation procedure
+\family sans
+.
+\end_layout
+
+\begin_layout Section*
+References
+\end_layout
+
+\begin_layout Standard
+If you use 
+\family sans
+libOpenSMOKE
+\family default
+ library in your publications, please cite the following papers: 
+\end_layout
+
+\begin_layout Quotation
+A.
+ Cuoci, A.
+ Frassoldati, T.
+ Faravelli, E.
+ Ranzi, 
+\emph on
+
+\begin_inset Quotes eld
+\end_inset
+
+Formation of soot and nitrogen oxides in unsteady counter flow diffusion
+ flames
+\begin_inset Quotes erd
+\end_inset
+
+
+\emph default
+, Combustion and Flame 156 (10), pp.
+ 2010-2022 (2009)
+\end_layout
+
+\begin_layout Quotation
+A.
+ Cuoci, A.
+ Frassoldati, T.
+ Faravelli, E.
+ Ranzi, 
+\emph on
+
+\begin_inset Quotes eld
+\end_inset
+
+Kinetic modeling of soot formation in turbulent non premixed flames
+\begin_inset Quotes erd
+\end_inset
+
+
+\emph default
+,
+\emph on
+ 
+\emph default
+Environmental Engineering Science, 25 (10), pp.
+ 1407-1422 (2008) 
+\end_layout
+
+\begin_layout Section
+Library description
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+The 
+\family sans
+libOpenSMOKE
+\family roman
+ library is organized in several folders, containing source code, utilities,
+ documentation, examples, etc., which are briefly described in the following
+ (see Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:libOpenSMOKE-library-structure"
+
+\end_inset
+
+):
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+
+\family sans
+doc:
+\family default
+ this folder contains the documentation for compiling and using the 
+\family sans
+libOpenSMOKE
+\family default
+ library
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+
+\family sans
+lib:
+\family default
+ 
+\family sans
+libOpenSMOKE
+\family default
+ compiled libraries are stored in this folder
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+
+\family sans
+src:
+\family default
+ source code to be compiled in 
+\family sans
+OpenFOAM-1.7
+\family default
+ can be found in this folder
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+
+\family sans
+tutorials:
+\family default
+ this folder contains several tutorials and examples about the use of 
+\family sans
+libOpenSMOKE
+\family default
+ library and solvers
+\end_layout
+
+\begin_layout Labeling
+\labelwidthstring 00.00.0000
+
+\family sans
+utilities:
+\family default
+ this folder contains several utilities to generate laminar, steady-state
+ flamelets and look-up tables to be used in conjunction with 
+\family sans
+libOpenSMOKE
+\family default
+ solvers
+\end_layout
+
+\begin_layout Standard
+In the following subsections the content of each folder is described in
+ details.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+dirtree{%
+\end_layout
+
+\begin_layout Plain Layout
+
+.1 libOpenSMOKE.
+\end_layout
+
+\begin_layout Plain Layout
+
+.2 doc.
+\end_layout
+
+\begin_layout Plain Layout
+
+.2 lib.
+\end_layout
+
+\begin_layout Plain Layout
+
+.2 src.
+\end_layout
+
+\begin_layout Plain Layout
+
+.2 tutorials.
+\end_layout
+
+\begin_layout Plain Layout
+
+.2 utilities.
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\family sans
+libOpenSMOKE
+\family default
+ library structure
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:libOpenSMOKE-library-structure"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Source code
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+The core of the library is the 
+\family sans
+src
+\family roman
+ folder, containing the code to be compiled and linked with 
+\family sans
+OpenFOAM-1.7
+\family roman
+.
+ The source files are organized as reported in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:src-folder-content"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+dirtree{%
+\end_layout
+
+\begin_layout Plain Layout
+
+.1 src.
+\end_layout
+
+\begin_layout Plain Layout
+
+.2 applications.
+\end_layout
+
+\begin_layout Plain Layout
+
+.3 rhoPisoFoamFlamelets.
+\end_layout
+
+\begin_layout Plain Layout
+
+.3 rhoSimpleFoamFlamelets.
+\end_layout
+
+\begin_layout Plain Layout
+
+.3 rhoSimpleFoamPostProcessorSoot2E.
+\end_layout
+
+\begin_layout Plain Layout
+
+.3 rhoSimpleFoamPostProcessorSootQMOM.
+\end_layout
+
+\begin_layout Plain Layout
+
+.2 libraries.
+\end_layout
+
+\begin_layout Plain Layout
+
+.3 common.
+\end_layout
+
+\begin_layout Plain Layout
+
+.3 flamelets.
+\end_layout
+
+\begin_layout Plain Layout
+
+.3 pdfThermo.
+\end_layout
+
+\begin_layout Plain Layout
+
+.3 qmom.
+\end_layout
+
+\begin_layout Plain Layout
+
+.3 twoequations.
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\family sans
+src
+\family default
+ folder content
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:src-folder-content"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+The source files are available in two main folders: 
+\family sans
+applications
+\family roman
+ folder contains the code for the 
+\family sans
+libOpenSMOKE
+\family roman
+ solvers; the 
+\family sans
+libraries
+\family roman
+ folder contains the code for the following 
+\family sans
+libOpenSMOKE
+\family roman
+ sub-libraries: 
+\end_layout
+
+\begin_layout Itemize
+
+\family sans
+common
+\family default
+: this sub-library contains some utilities and classes which can be called
+ by the others sub-libraries (i.e.
+ mathematical functions, probability distribution functions, etc.)
+\end_layout
+
+\begin_layout Itemize
+
+\family sans
+flamelets
+\family default
+: classes to manage steady state, non adiabatic flamelet libraries, for
+ simulation of non-premixed, turbulent flames
+\end_layout
+
+\begin_layout Itemize
+
+\family sans
+twoequations
+\family default
+: classes used to calculate soot formation in turbulent flames using the
+ method of moments (2E Model)
+\end_layout
+
+\begin_layout Itemize
+
+\family sans
+qmom
+\family default
+: classes used to calculate soot formation in turbulent flames using the
+ method of moments with the QMOM (Quadrature Method of Moments)
+\end_layout
+
+\begin_layout Itemize
+
+\family sans
+pdfThermo
+\family default
+: new thermodynamics to manage steady state, non adiabatic flamelet libraries
+ directly in 
+\family sans
+OpenFOAM
+\end_layout
+
+\begin_layout Subsection
+Utilities
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+This folder contains three main utilities needed by 
+\family sans
+libOpenSMOKE
+\family roman
+ library to perform numerical simulations of turbulent, non-premixed flames:
+\end_layout
+
+\begin_layout Itemize
+
+\family sans
+OpenSMOKE_CHEMKINInterpreter.sh:
+\family default
+ utility to pre-process 
+\family sans
+CHEMKIN
+\family default
+ mechanisms
+\end_layout
+
+\begin_layout Itemize
+
+\family sans
+OpenSMOKE_SteadyStateFlamelets.sh:
+\family default
+ utility to generate flamelet profiles using detailed kinetics
+\end_layout
+
+\begin_layout Itemize
+
+\family sans
+OpenSMOKE_LookUpTable.sh:
+\family default
+ utility to generate look-up tables to be used in 
+\family sans
+libOpenSMOKE
+\end_layout
+
+\begin_layout Standard
+In addition this folder contains some detailed kinetic mechanisms for hydrocarbo
+n combustion and pyrolysis from CRECK (Chemical Reaction Engineering and
+ Chemical Kinetics) Group at Politecnico di Milano.
+ Both the 
+\family sans
+CHEMKIN
+\family default
+ format and the pre-processed versions of each kinetic scheme are available.
+\end_layout
+
+\begin_layout Subsection
+Tutorials
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+This folder contains several tutorials about the use of 
+\family sans
+libOpenSMOKE
+\family roman
+ library:
+\end_layout
+
+\begin_layout Itemize
+
+\family sans
+Sandia_HE0:
+\family default
+ this tutorial shows the application of non-adiabatic, laminar flamelet
+ model to the 
+\family sans
+Sandia HE0
+\family default
+ Flame 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Barlow2003,Barlow1994,Barlow1996"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\family sans
+Sandia_COH2N2:
+\family default
+ this tutorial shows the application of non-adiabatic, laminar flamelet
+ model to the 
+\family sans
+Sandia COH2N2
+\family default
+ Flame 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Barlow2002,Barlow2000"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\family sans
+KentHonnery:
+\family default
+ this tutorial shows the application of non-adiabatic, laminar flamelet
+ model to the turbulent jet flame experimentally investigated by Kent and
+ Honnery 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Kent1987"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\family sans
+KentHonneryPostProcessing:
+\family default
+ in this tutorial the 
+\family sans
+KentHonnery
+\family default
+ case (see above) is post processed to estimate soot formation
+\end_layout
+
+\begin_layout Itemize
+
+\family sans
+LookUpTable_Assembling:
+\family default
+ in this tutorial the generation of a non adiabatic look-up table is described
+\end_layout
+
+\begin_layout Standard
+
+\family roman
+ 
+\end_layout
+
+\begin_layout Section
+Compilation and Installation
+\end_layout
+
+\begin_layout Subsection
+Prerequisites
+\end_layout
+
+\begin_layout Standard
+In order to compile the 
+\family sans
+libOpenSMOKE
+\family default
+ library, the 
+\family sans
+GSL (GNU Scientific Library)
+\family default
+ is required.
+ This library can be freely downloaded at the following web address:
+\end_layout
+
+\begin_layout Quotation
+
+\family sans
+www.gnu.org/software/gsl/
+\end_layout
+
+\begin_layout Subsection
+Sub-libraries compilation and installation
+\end_layout
+
+\begin_layout Standard
+In the following the detailed procedure to compile and install the 
+\family sans
+libOpenSMOKE
+\family default
+ sub-libraries is reported.
+\end_layout
+
+\begin_layout Enumerate
+Copy the 
+\family sans
+libOpenSMOKE
+\family default
+ folder in your 
+\family sans
+OpenFOAM
+\family default
+ folder:
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+
+\family sans
+cp -r libOpenSMOKE $FOAM_INST_DIR
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Update the path to 
+\family sans
+GSL
+\family default
+ library in 
+\family sans
+src/libraries/qmom/Make/options
+\family default
+ and 
+\family sans
+src/libraries/pdfThermo/Make/options
+\family default
+ files using the correct path on your machine
+\end_layout
+
+\begin_layout Enumerate
+Clean the library using the 
+\family sans
+Allwclean
+\family default
+ script in 
+\family sans
+libOpenSMOKE/src/libraries
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+
+\family sans
+cd $FOAM_INST_DIR/libOpenSMOKE/src/libraries
+\end_layout
+
+\begin_layout Standard
+
+\family sans
+./Allwclean
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Compile the library using the 
+\family sans
+Allwmake
+\family default
+ script in 
+\family sans
+libOpenSMOKE/src/libraries
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+
+\family sans
+cd $FOAM_INST_DIR/libOpenSMOKE/src/libraries
+\end_layout
+
+\begin_layout Standard
+
+\family sans
+./Allwmake
+\end_layout
+
+\end_deeper
+\begin_layout Subsection
+Solvers compilation and installation
+\end_layout
+
+\begin_layout Standard
+In the following the detailed procedure to compile and install the 
+\family sans
+libOpenSMOKE
+\family default
+ solvers is reported.
+\end_layout
+
+\begin_layout Enumerate
+For each solver, update the path reported in the 
+\family sans
+Make/files
+\family default
+ according to your preferences
+\end_layout
+
+\begin_layout Enumerate
+For each solve, update the path to GSL library in 
+\family sans
+Make/options
+\family default
+ 
+\end_layout
+
+\begin_layout Enumerate
+Clean the solvers using the 
+\family sans
+Allwclean
+\family default
+ script in 
+\family sans
+libOpenSMOKE/src/applications
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+
+\family sans
+cd $FOAM_INST_DIR/libOpenSMOKE/src/applications
+\end_layout
+
+\begin_layout Standard
+
+\family sans
+./Allwclean
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Compile the solvers using the 
+\family sans
+Allwmake
+\family default
+ script in 
+\family sans
+libOpenSMOKE/src/applications
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+
+\family sans
+cd $FOAM_INST_DIR/libOpenSMOKE/src/applications
+\end_layout
+
+\begin_layout Standard
+
+\family sans
+./Allwmake
+\end_layout
+
+\end_deeper
+\begin_layout Section
+Kinetic schemes pre-processing
+\end_layout
+
+\begin_layout Standard
+The 
+\family sans
+libOpenSMOKE
+\family default
+ library requires detailed kinetic schemes, thermodynamic and transport
+ properties in 
+\family sans
+CHEMKIN
+\family default
+ format.
+ However, to be effectively used, a 
+\family sans
+CHEMKIN
+\family default
+ mechanism must be pre-processed.
+ The 
+\family sans
+OpenSMOKE_CHEMKINInterpreter.sh
+\family default
+ utility (available in 
+\family sans
+utilities/exe
+\family default
+ folder) is used for this purpose.
+ Several kinetic mechanisms, both in 
+\family sans
+CHEMKIN
+\family default
+ format and already pre-processed can be found in the 
+\family sans
+utilities/kinetics
+\family default
+ folder.
+ 
+\end_layout
+
+\begin_layout Standard
+The 
+\family sans
+OpenSMOKE_CHEMKINInterpreter.sh
+\family default
+ can be executed using the following command:
+\end_layout
+
+\begin_layout Quotation
+
+\family sans
+OpenSMOKE_CHEMKINInterpreter.sh --kinetics "KineticScheme.kin" --thermo "Termodyna
+mics.tdc" --transport "Transport.tra" --output "OutputFolder"
+\end_layout
+
+\begin_layout Standard
+The kinetic scheme, thermodynamics and transport properties files are provided
+ through the 
+\family sans
+--kinetics
+\family default
+, 
+\family sans
+--thermo
+\family default
+ and 
+\family sans
+--transport
+\family default
+ options respectively.
+ In the output folder two binary files, 
+\family sans
+idealgas.bin
+\family default
+ and 
+\family sans
+reactions.bin
+\family default
+, are generated, containing the interpreted kinetic scheme, together with
+ thermodynamic and transport properties.
+ Moreover, additional files containing additional information are available
+ (these files are not strictly necessary and can be deleted).
+\end_layout
+
+\begin_layout Standard
+Several kinetic schemes, together with transport properties and thermodynamic
+ data, are distributed together with the 
+\family sans
+libOpenSMOKE
+\family default
+ library.
+ They were developed by CRECK (Chemical Reaction Engineering and Chemical
+ Kinetics) Group at Politecnico di Milano and can be also freely downloaded
+ at the following web address: 
+\end_layout
+
+\begin_layout Quotation
+
+\family sans
+http://creckmodeling.chem.polimi.it/
+\end_layout
+
+\begin_layout Section
+Look-Up Table construction
+\end_layout
+
+\begin_layout Standard
+The 
+\family sans
+rhoSimpleFoamFlamelets
+\family default
+ solver requires the calculation of a look-up table, in which temperature,
+ mass fractions and physical properties (density, thermal conductivity,
+ viscosity, etc.) are stored as a function of 3 independent variables: mixture
+ fraction, scalar dissipation rate and enthalpy defect.
+ The 
+\family sans
+rhoSimpleFoamFlamelets
+\family default
+ solver applies a suitable set of PDFs (Probability Distribution Functions)
+ to the flamelet profiles stored in the look-up table, according to the
+ local values (i.e.
+ in each computational cell) of independent variables:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+\widetilde{\psi}=\int_{-\infty}^{\infty}\int_{0}^{\infty}\int_{0}^{1}\psi\left(Z,\chi_{st},\phi_{H}\right)P\left(Z\right)P\left(\chi_{st}\right)P\left(\phi_{H}\right)dZ\cdot d\chi_{st}\cdot d\phi_{H}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Usually, a 
+\begin_inset Formula $\beta$
+\end_inset
+
+-PDF or a clipped-Gaussian PDF is used for 
+\begin_inset Formula $Z$
+\end_inset
+
+ (mixture fraction space), a log-normal distribution for 
+\begin_inset Formula $\chi_{st}$
+\end_inset
+
+ (scalar dissipation rate space) and a delta-Dirac function for 
+\begin_inset Formula $\phi_{H}$
+\end_inset
+
+ (enthalpy defect space).
+ 
+\end_layout
+
+\begin_layout Standard
+In order to save computational time during the CFD calculation, the integration
+ with respect the mixture fraction is pre-calculated and stored in the look-up
+ table.
+ This means that the real look-up table which is managed by the 
+\family sans
+rhoSimpleFoamFlamelets
+\family default
+ is defined on 4 independent variables: mixture fraction 
+\begin_inset Formula $Z$
+\end_inset
+
+, scalar dissipation rate 
+\begin_inset Formula $\chi_{st}$
+\end_inset
+
+, enthalpy defect 
+\begin_inset Formula $\phi_{H}$
+\end_inset
+
+ and variance of mixture fraction 
+\begin_inset Formula $\widetilde{Z^{''2}}$
+\end_inset
+
+.
+ This last variable is needed to perform the integration in the mixture
+ fraction space, since both the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-PDF and the clipped-Gaussian PDF require the knowledge of the mixture fraction
+ variance to be completely defined.
+ Therefore, only the integration in the scalar dissipation rate space is
+ performed by the 
+\family sans
+rhoSimpleFoamFlamelets
+\family default
+ solver.
+ 
+\end_layout
+
+\begin_layout Standard
+The construction of a look-up table consists of three main steps: 
+\end_layout
+
+\begin_layout Enumerate
+generation of flamelets profiles at several scalar dissipation rates (from
+ equilibrium conditions to extinction) and several enthalpy defects; 
+\end_layout
+
+\begin_layout Enumerate
+application of 
+\begin_inset Formula $\beta$
+\end_inset
+
+-PDF (or clipped-Gaussian PDF) in the mixture fraction space to flamelets
+ profiles previously calculated; 
+\end_layout
+
+\begin_layout Enumerate
+assembling of the whole look-up table.
+ 
+\end_layout
+
+\begin_layout Standard
+The first two steps reported above are managed by two different applications,
+ respectively called 
+\family sans
+OpenSMOKE_SteadyStateFlamelets.sh
+\family default
+ and 
+\family sans
+OpenSMOKE_LookUpTable.sh
+\family default
+, which must be strictly applied in sequence.
+ In the following a brief description of each tool is reported.
+ 
+\end_layout
+
+\begin_layout Subsection
+OpenSMOKE_SteadyStateFlamelets 
+\end_layout
+
+\begin_layout Standard
+The 
+\family sans
+OpenSMOKE_SteadyStateFlamelets.sh
+\family default
+ allows the user to generate a set of steady-state, laminar flamelets with
+ different scalar dissipation rates at a fixed value of enthalpy defect.
+ If additional enthalpy defects are needed, the 
+\family sans
+OpenSMOKE_SteadyStateFlamelets.sh
+\family default
+ utility can be reused specifying the required enthalpy defect value.
+ 
+\end_layout
+
+\begin_layout Standard
+The 
+\family sans
+OpenSMOKE_SteadyStateFlamelets.sh
+\family default
+ requires a detailed kinetic scheme and two input files (which will be called
+ in the following as 
+\family sans
+Data.inp
+\family default
+ and 
+\family sans
+Operations.inp
+\family default
+).
+ The 
+\family sans
+Data.inp
+\family default
+ file contains the flamelet definition, while the 
+\family sans
+Operations.inp
+\family default
+ file additional details about the numerical procedure to obtain the flamelet
+ solution.
+ A typical 
+\family sans
+Data.inp
+\family default
+ file is reported in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Example-of-Data.inp"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset listings
+lstparams "basicstyle={\footnotesize\sffamily},language={C++},tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+// --------------------------------------------------------------------
+ // 
+\end_layout
+
+\begin_layout Plain Layout
+
+// Flamelet // 
+\end_layout
+
+\begin_layout Plain Layout
+
+// --------------------------------------------------------------------
+ //
+\end_layout
+
+\begin_layout Plain Layout
+
+#Fuel CH4 
+\end_layout
+
+\begin_layout Plain Layout
+
+#Oxidizer O2 
+\end_layout
+
+\begin_layout Plain Layout
+
+#Inert N2 
+\end_layout
+
+\begin_layout Plain Layout
+
+#Points 80
+\end_layout
+
+\begin_layout Plain Layout
+
+#Pressure 1 atm
+\end_layout
+
+\begin_layout Plain Layout
+
+#FuelTemperature 333.
+ K 
+\end_layout
+
+\begin_layout Plain Layout
+
+#FuelMoleFractions CH4 0.95 C2H6 0.025 CO2 0.005 N2 0.02 
+\end_layout
+
+\begin_layout Plain Layout
+
+#OxidizerTemperature 292.
+ K 
+\end_layout
+
+\begin_layout Plain Layout
+
+#OxidizerMoleFractions O2 0.21 N2 0.79 
+\end_layout
+
+\begin_layout Plain Layout
+
+#FlameTemperature 2200.
+ K 
+\end_layout
+
+\begin_layout Plain Layout
+
+#FlamePosition 0.90
+\end_layout
+
+\begin_layout Plain Layout
+
+#OutputSpecies ALL 
+\end_layout
+
+\begin_layout Plain Layout
+
+#ScalarDissipationRates 1.e-6 1.e-4 1e-2 1.
+ 5.
+ 10.
+ 20.
+ 30.
+ 40.
+ 45.
+ Hz 
+\end_layout
+
+\begin_layout Plain Layout
+
+#EnthalpyDefect -100.0 kJ/kg 
+\end_layout
+
+\begin_layout Plain Layout
+
+#MinimumTemperature 292 K 
+\end_layout
+
+\begin_layout Plain Layout
+
+#RelativeTolerance 1.e5 
+\end_layout
+
+\begin_layout Plain Layout
+
+#END
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Example of 
+\family sans
+Data.inp
+\family default
+ file for 
+\family sans
+OpenSMOKE_SteadyStateFlamelets.sh
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Example-of-Data.inp"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Comments are introduced by a 
+\family sans
+//
+\family default
+ and can be inserted in every point.
+ Key words always begin with the 
+\family sans
+#
+\family default
+ symbol.
+ In Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Options-in-Data.inp"
+
+\end_inset
+
+, an explanation of each row is reported.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="19" columns="2">
+<features>
+<column alignment="left" valignment="top" width="0">
+<column alignment="center" valignment="top" width="60col%">
+<row>
+<cell multicolumn="1" alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Option
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Description
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family sans
+#Fuel
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Name of fuel species
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family sans
+#Oxidizer
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Name of oxidizer species
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family sans
+#Inert
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Name of inert species
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family sans
+#Points
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Number of initial grid points
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family sans
+#Pressure
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Pressure
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family sans
+#FuelTemperature
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Temperature of fuel inlet stream
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family sans
+#OxidizerTemperature
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Temperature of oxidizer inlet stream
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family sans
+#FuelMoleFractions
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Composition (in mole fractions) of fuel inlet stream.
+ Alternatively the 
+\family sans
+#FuelMassFractions
+\family default
+ keyword can be used.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family sans
+#OxidizerMoleFractions
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Composition (in mole fractions) of oxidizer inlet stream.
+ Alternatively the 
+\family sans
+#FuelMassFractions
+\family default
+ keyword can be used.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family sans
+#ScalarDissipationRates
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+List of scalar dissipation rates to be calculated
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family sans
+#EnthalpyDefect
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Enthalpy defect value (adiabatic conditions corresponds to a value of 0
+ kJ/kg)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family sans
+#FlameTemperature
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+First guess value of peak temperature
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family sans
+#FlamePosition
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+First guess value of peak temperature position (in the mixture fraction
+ space)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family sans
+#OutputSpecies
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+List of species to be written in the output files (
+\family sans
+ALL
+\family default
+ means that every species in the kinetic mechanisms is considered)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family sans
+#MinimumTemperature
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Minimum temperature value for non adiabatic calculations
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family sans
+#RelativeTolerance
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Relative tolerance for ODE system solution.
+ The value 1.e5 is internally multiplied by the machine epsilon
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Options in 
+\family sans
+Data.inp
+\family default
+ file for 
+\family sans
+OpenSMOKE_SteadyStateFlamelets
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Options-in-Data.inp"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The 
+\family sans
+Operations.inp
+\family default
+ file is used to suggest the grid refining operations to be performed to
+ obtain accurate flamelets solutions.
+ An example 
+\family sans
+of Operations.inp
+\family default
+ file is reported in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Example-of-Operations.inp"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset listings
+lstparams "basicstyle={\footnotesize\sffamily},language={C++},tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+	SOLVE 1e5
+\end_layout
+
+\begin_layout Plain Layout
+
+	REFINELEANSIDE 0.65 SOLVE 1e5
+\end_layout
+
+\begin_layout Plain Layout
+
+	REFINELEANSIDE 0.80 SOLVE 1e5
+\end_layout
+
+\begin_layout Plain Layout
+
+	REFINELEANSIDE 0.90 SOLVE 1e5
+\end_layout
+
+\begin_layout Plain Layout
+
+	REFINELEANSIDE 0.90 SOLVE 1e5
+\end_layout
+
+\begin_layout Plain Layout
+
+	CYCLE 4
+\end_layout
+
+\begin_layout Plain Layout
+
+	NEWPOINTS TEMPERATURE D SOLVE 1e5
+\end_layout
+
+\begin_layout Plain Layout
+
+	NEWPOINTS TEMPERATURE G SOLVE 1e5
+\end_layout
+
+\begin_layout Plain Layout
+
+	ENDCYCLE
+\end_layout
+
+\begin_layout Plain Layout
+
+END
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Example of 
+\family sans
+Operations.inp
+\family default
+ file for 
+\family sans
+OpenSMOKE_SteadyStateFlamelets.sh
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Example-of-Operations.inp"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The command 
+\family sans
+SOLVE 1e5
+\family default
+ means that the flamelet profile must be solved on the current grid using
+ a transient integration method, for 1.e5 seconds (to reach steady state
+ conditions).
+ 
+\family sans
+REFINELEANSIDE 0.65
+\family default
+ command requires grid refining on the lean side of the flamelet, in the
+ region where temperature are at least 0.65 times the peak temperature.
+
+\family sans
+ NEWPOINTS TEMPERATURE D
+\family default
+ command requires grid refining on the whole mixture fraction space in regions
+ where the temperature gradient is not well described.
+ 
+\family sans
+NEWPOINTS TEMPERATURE G
+\family default
+ command requires grid refining on the whole mixture fraction space in regions
+ where the temperature curvature is not well described.
+ Loops can be specified through the 
+\family sans
+CYCLE N … ENDCYCLE
+\family default
+ commands.
+ The operations (…) between 
+\family sans
+CYCLE
+\family default
+ and 
+\family sans
+ENDCYCLE
+\family default
+ keywords must be repeated N times.
+\end_layout
+
+\begin_layout Standard
+The 
+\family sans
+OpenSMOKE_SteadyStateFlamelets
+\family default
+ utility can be executed by specifying the detailed kinetic scheme folder
+ and the input files, according to the following syntax: 
+\end_layout
+
+\begin_layout Quotation
+
+\family sans
+OpenSMOKE_SteadyStateFlamelets.sh --kinetics “KineticScheme” --input “Data.inp”
+ --schedule "Operations.inp" 
+\end_layout
+
+\begin_layout Standard
+Output files are stored in a folder whose name is 
+\family sans
+Flamelet_XXX
+\family default
+, where 
+\family sans
+XXX
+\family default
+ is the name of the kinetic scheme adopted for calculations.
+ Flamelet profiles are available in the Steady sub-folder, with names like
+ 
+\family sans
+Final_YYY_Hz.out
+\family default
+, where 
+\family sans
+YYY
+\family default
+ is the scalar dissipation rate value.
+\end_layout
+
+\begin_layout Subsection
+OpenSMOKE_LookUpTable 
+\end_layout
+
+\begin_layout Standard
+Flamelets profiles calculated in the previous step must be processed by
+ applying a suitable PDF in the mixture fraction space to be used in CFD
+ calculations.
+ This operation can be performed using the 
+\family sans
+OpenSMOKE_LookUpTable.sh
+\family default
+ utility, which requires a detailed kinetic scheme (of course the same used
+ for generation of flamelet profiles) and an input file (which will be called
+ 
+\family sans
+Data.inp
+\family default
+ in the following), describing some options concerning PDF integration.
+ Suppose that a set of 3 flamelets was generated using the 
+\family sans
+OpenSMOKE_SteadyStateFlamelets.sh
+\family default
+ utility and we want to apply a 
+\begin_inset Formula $\beta$
+\end_inset
+
+-PDF using the 
+\family sans
+OpenSMOKE_LookUpTable.sh
+\family default
+ utility.
+ The corresponding Data.inp file is reported in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Example-of-Data.inp-Look"
+
+\end_inset
+
+.
+ The meaning of each option is reported in Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Options-in-Data.inp-1"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset listings
+lstparams "basicstyle={\footnotesize\sffamily},language={C++},tabsize=4"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+// -------------------------------------------- // 
+\end_layout
+
+\begin_layout Plain Layout
+
+// LookUp Table // 
+\end_layout
+
+\begin_layout Plain Layout
+
+// -------------------------------------------- //
+\end_layout
+
+\begin_layout Plain Layout
+
+#Pdf BETA 
+\end_layout
+
+\begin_layout Plain Layout
+
+#ListOfFlamelets Final_1e-005_Hz.out Final_0.0001_Hz.out Final_0.001_Hz.out 
+\end_layout
+
+\begin_layout Plain Layout
+
+#FlameletLibrary PDF+200.fla 
+\end_layout
+
+\begin_layout Plain Layout
+
+#LookUpTable PDF+200.lib 
+\end_layout
+
+\begin_layout Plain Layout
+
+#LookUpTableOpenFOAM PDF+200-Lib 
+\end_layout
+
+\begin_layout Plain Layout
+
+#NumberOfVariances 32 
+\end_layout
+
+\begin_layout Plain Layout
+
+#StretchingFactor 1.17
+\end_layout
+
+\begin_layout Plain Layout
+
+#END
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Example of 
+\family sans
+Data.inp
+\family default
+ file for 
+\family sans
+OpenSMOKE_LookUpTable.sh
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Example-of-Data.inp-Look"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="8" columns="2">
+<features>
+<column alignment="left" valignment="top" width="0">
+<column alignment="center" valignment="top" width="60col%">
+<row>
+<cell multicolumn="1" alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Option
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Description
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family sans
+#Pdf 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Kind of probability distribution function to be applied in the mixture fraction
+ space.
+ 
+\family sans
+BETA
+\family default
+ and 
+\family sans
+GAUSSIAN
+\family default
+ options are available
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family sans
+#ListOfFlamelets
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+List of flamelet profiles to be post-processed.
+ These profiles were obtained using the 
+\family sans
+OpenSMOKE_SteadyStateFlamelets
+\family default
+ utility
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family sans
+#FlameletLibrary
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Flamelets profiles can be colletcted in a single file with (with 
+\family sans
+fla
+\family default
+ extension), which can be imported in FLUENT commercial CFD code
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family sans
+#LookUpTable
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+The look-up table can be generated in a format (with 
+\family sans
+lib
+\family default
+ extension) which can be imported in FLUENT commercial code
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family sans
+#LookUpTableOpenFOAM
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+This option indicates the name of the folder in which the post-processed
+ flamelet profiles will be stored
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family sans
+#NumberOfVariances
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Number of points in the variance of mixture fraction space for look-up table
+ construction
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family sans
+#StretchingFactor
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Stretching factor along the variance of mixture fraction space 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Options in 
+\family sans
+Data.inp
+\family default
+ file for 
+\family sans
+OpenSMOKE_LookUpTable.sh
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Options-in-Data.inp-1"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The 
+\family sans
+OpenSMOKE_LookUpTable.sh
+\family default
+ utility can be executed from the command line by specifying the detailed
+ kinetic scheme folder and the input file, according to the following syntax:
+ 
+\end_layout
+
+\begin_layout Quotation
+
+\family sans
+OpenSMOKE_LookUpTable.sh --kinetics “KineticScheme” --input “Data.inp” -build-libr
+ary 
+\end_layout
+
+\begin_layout Standard
+Output files are stored in the folder whose name is specified trough the
+ 
+\family sans
+#LookUpTableTest
+\family default
+ options.
+ In particular in this folder a series of 
+\family sans
+.bin
+\family default
+ files, corresponding to the post-processed flamelet profiles can be found,
+ together with a 
+\family sans
+LookUpTable.out
+\family default
+ file containing additional data about the look-up table.
+ These 
+\family sans
+bin
+\family default
+ files will be used by the 
+\family sans
+rhoSimpleFoamFlamelets
+\family default
+ solver.
+ See Figure
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Look-up-table-structure"
+
+\end_inset
+
+ for additional details.
+\end_layout
+
+\begin_layout Subsection
+Assembling 
+\end_layout
+
+\begin_layout Standard
+The post-processed flamelet profiles (
+\family sans
+bin
+\family default
+ files described above), need to be organized in shelves, before their use
+ in 
+\family sans
+libOpenSMOKE
+\family default
+.
+ Each shelf refers to a different value of enthalpy defect.
+ The available shelves are collected in a main folder, which will be called
+ 
+\family sans
+pdfLibrary
+\family default
+ in the following.
+ The 
+\family sans
+pdfLibrary
+\family default
+ folder contains a 
+\family sans
+LookUpTable.out
+\family default
+ files, in which the list of enthalpy defects (i.e.
+ the list of shelves) is reported.
+ Each enthalpy defect has a specific sub-folder (let's say 
+\family sans
+PDF-X
+\family default
+, where 
+\family sans
+X
+\family default
+ is the enthalpy defect value), in which the 
+\family sans
+bin
+\family default
+ files described in the previous section, together with the 
+\family sans
+LookUpTable.out
+\family default
+ file, are included.
+ The tree reported in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Look-up-table-structure"
+
+\end_inset
+
+ refers to a typical look-up table containing different values of enthalpy
+ defects.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+dirtree{%
+\end_layout
+
+\begin_layout Plain Layout
+
+.1 pdfLibrary.
+\end_layout
+
+\begin_layout Plain Layout
+
+.2 LookUpTable.inp.
+\end_layout
+
+\begin_layout Plain Layout
+
+.2 PDF+100.
+\end_layout
+
+\begin_layout Plain Layout
+
+.3 LookUpTable.inp.
+\end_layout
+
+\begin_layout Plain Layout
+
+.3 SR1.bin.
+\end_layout
+
+\begin_layout Plain Layout
+
+.3 ....
+\end_layout
+
+\begin_layout Plain Layout
+
+.2 PDF+050.
+\end_layout
+
+\begin_layout Plain Layout
+
+.3 LookUpTable.inp.
+\end_layout
+
+\begin_layout Plain Layout
+
+.3 SR1.bin.
+\end_layout
+
+\begin_layout Plain Layout
+
+.3 ....
+\end_layout
+
+\begin_layout Plain Layout
+
+.2 PDF0.
+\end_layout
+
+\begin_layout Plain Layout
+
+.3 LookUpTable.inp.
+\end_layout
+
+\begin_layout Plain Layout
+
+.3 SR1.bin.
+\end_layout
+
+\begin_layout Plain Layout
+
+.3 ....
+\end_layout
+
+\begin_layout Plain Layout
+
+.2 PDF-050.
+\end_layout
+
+\begin_layout Plain Layout
+
+.3 LookUpTable.inp.
+\end_layout
+
+\begin_layout Plain Layout
+
+.3 SR1.bin.
+\end_layout
+
+\begin_layout Plain Layout
+
+.3 ....
+\end_layout
+
+\begin_layout Plain Layout
+
+.2 ....
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Look-up table structure
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Look-up-table-structure"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Tutorial 
+\end_layout
+
+\begin_layout Standard
+This tutorial describes the generation of a non-adiabatic look-up table
+ for a mixture H2/air.
+ It can be found in the 
+\family sans
+LookUpTable_Assembling
+\family default
+ folder distributed with 
+\family sans
+libOpenSMOKE
+\family default
+ library.
+ Inlet temperatures are 295K and 294K, for fuel and oxidizer streams respectivel
+y.
+ Only 3 enthalpy defects are accounted for (0, -50 and -100 kJ/kg); for
+ each enthalpy defect 10 scalar dissipation rates are simulated (from 1e-6
+ Hz to extinction).
+ A 
+\begin_inset Formula $\beta$
+\end_inset
+
+-PDF will be used in the mixture fraction space.
+ The kinetic scheme to be adopted is the 
+\family sans
+PolimiH2_1006
+\family default
+, which is distributed together with the 
+\family sans
+libOpenSMOKE
+\family default
+ library (in 
+\family sans
+utilities/kinetics/PreProcessed
+\family default
+ folder).
+ 
+\end_layout
+
+\begin_layout Enumerate
+Generation of flamelet profiles (
+\family sans
+Step01
+\family default
+ folder)
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Three sets of flamelet profiles must be generated, corresponding to the
+ 3 different enthalpy defects required.
+ Let’s start from the first value (0 kJ/kg), which means adiabatic conditions,
+ typing the following command line in 
+\family sans
+Step01
+\family default
+ folder:
+\end_layout
+
+\begin_deeper
+\begin_layout Quotation
+
+\family sans
+OpenSMOKE_SteadyStateFlamelet.sh
+\begin_inset Newline newline
+\end_inset
+
+--kinetics "../../../utilities/kinetics/PreProcessed/PolimiH2CO_1006"
+\begin_inset Newline newline
+\end_inset
+
+--input "Data.inp"
+\begin_inset Newline newline
+\end_inset
+
+--schedule "Operations.inp" 
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Let’s rename the folder containing the flamelet profiles:
+\end_layout
+
+\begin_deeper
+\begin_layout Quotation
+
+\family sans
+mv Flamelet_PolimiH2_1006/Profiles/ Flamelet-0
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Repeat the steps 
+\family sans
+a
+\family default
+ and 
+\family sans
+b
+\family default
+ also for the other 2 enthalpy defect values, by changing the 
+\family sans
+#EnthalpyDefect
+\family default
+ line in the 
+\family sans
+Data.inp
+\family default
+ input file and storing the flamelet profiles in 
+\family sans
+Flamelet-050
+\family default
+ and 
+\family sans
+Flamelet-100 folders
+\family default
+.
+ At the end of these operations the generation of flamelet profiles is completed.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Post-processing (
+\family sans
+Step02
+\family default
+ folder)
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Now we have to apply the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-PDF to the three sets of flamelet profiles we just created.
+ Let’s start from the adiabatic profiles in the 
+\family sans
+Flamelet-0
+\family default
+ folder, by executing the 
+\family sans
+OpenSMOKE_LookUpTable
+\family default
+ utility through the following command line in the
+\family sans
+ Step02
+\family default
+ folder:
+\end_layout
+
+\begin_deeper
+\begin_layout Quotation
+
+\family sans
+../../../utilities/exe/OpenSMOKE_LookUpTable.sh
+\begin_inset Newline newline
+\end_inset
+
+--kinetics "../../../utilities/kinetics/PreProcessed/PolimiH2_1006"
+\begin_inset Newline newline
+\end_inset
+
+--input "Input.inp"
+\begin_inset Newline newline
+\end_inset
+
+-build-library
+\end_layout
+
+\begin_layout Standard
+At the end of this operation, the folder 
+\family sans
+PDF-0
+\family default
+ will contain the post-processed flamelet profiles referring to adiabatic
+ conditions (
+\family sans
+bin
+\family default
+ files and 
+\family sans
+LookUpTable.out
+\family default
+ file).
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Then we have to repeat the operations in point 
+\family sans
+a
+\family default
+ for the flamelets profiles in 
+\family sans
+Flamelet-050
+\family default
+ and 
+\family sans
+Flamelet-100
+\family default
+ folders.
+ This can be accomplished by changing the list of flamelet profiles (
+\family sans
+#ListOfFlamelets
+\family default
+) and the name of output folder (
+\family sans
+#LookUpTableTableTest
+\family default
+).
+ At the end of these operations three folders, 
+\family sans
+PDF-0
+\family default
+, 
+\family sans
+PDF-050
+\family default
+ and 
+\family sans
+PDF-100
+\family default
+, will be available.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Look-Up table assembling 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+The last step consist in assembling the folder containing the whole library.
+ Create a folder with name 
+\family sans
+pdfFolder
+\family default
+ (different names are possible) and put the three folders 
+\family sans
+PDF-0
+\family default
+, 
+\family sans
+PDF-050
+\family default
+ and 
+\family sans
+PDF-100
+\family default
+ in this folder.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Create a new file in the 
+\family sans
+pdfLibrary
+\family default
+ folder, called 
+\family sans
+LookUpTable.out
+\family default
+, in which the list of enthalpy defects must be written according to the
+ following: 
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+
+\family sans
+EnthalpyDefects 
+\end_layout
+
+\begin_layout Standard
+
+\family sans
+nphi 3 
+\end_layout
+
+\begin_layout Standard
+
+\family sans
+0.
+ PDF-0 
+\end_layout
+
+\begin_layout Standard
+
+\family sans
+-50.e3 PDF-050 
+\end_layout
+
+\begin_layout Standard
+
+\family sans
+-100.e3 PDF-100 
+\end_layout
+
+\begin_layout Standard
+Each enthalpy defect (in J/kg) is followed by the name of the folder containing
+ the corresponding binary files.
+ The number of enthalpy defects is indicate by the 
+\family sans
+nphi
+\family default
+ option.
+ The enthalpy defects in the list must be in decreasing order, otherwise
+ an error message will be prompted out.
+ 
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Enumerate
+Final comments 
+\end_layout
+
+\begin_deeper
+\begin_layout Standard
+If you want to extended the look-up table with new enthalpy defects, to
+ cover a larger range or to be more accurate in some regions, you can add
+ the corresponding new folders 
+\family sans
+PDF-X
+\family default
+ and update the list of enthalpy defects in 
+\family sans
+pdfLibrary/LookUpTable.out
+\family default
+ file.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Section
+Solvers
+\end_layout
+
+\begin_layout Standard
+In this section a brief description of solvers available in 
+\family sans
+libOpenSMOKE
+\family default
+ library is reported.
+\end_layout
+
+\begin_layout Subsection
+rhoSimpleFoamFlamelets
+\end_layout
+
+\begin_layout Standard
+The 
+\family sans
+rhoSimpleFoamFlamelets
+\family default
+ solver solves turbulent, non premixed flames using the steady-state, laminar
+ flamelet model (SLFM), based on the RANS approach.
+ Continuity and momentum equations are solved in the usual way together
+ with three additional equations: mixture fraction (
+\family sans
+csi
+\family default
+), variance of mixture fraction (
+\family sans
+csiv2
+\family default
+) and enthalpy (
+\family sans
+H
+\family default
+).
+ The 
+\family sans
+rhoSimpleFoamFlamelets
+\family default
+ solver needs a look-up in the format described in the previous section.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+flameletsProperties Dictionary
+\end_layout
+
+\begin_layout Standard
+The options to manage the SLFM are specified in the 
+\family sans
+flameletsProperties
+\family default
+ dictionary.
+ In Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:flameletsProperties-dictionary"
+
+\end_inset
+
+ an example is reported.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset listings
+lstparams "basicstyle={\footnotesize\sffamily},language={C++}"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+//Flamelet Library 
+\end_layout
+
+\begin_layout Plain Layout
+
+libraryPath "../PDF-Library";
+\end_layout
+
+\begin_layout Plain Layout
+
+adiabaticMode off;
+\end_layout
+
+\begin_layout Plain Layout
+
+varianceEquation on;
+\end_layout
+
+\begin_layout Plain Layout
+
+propertyUpdate 5;
+\end_layout
+
+\begin_layout Plain Layout
+
+massFractionsUpdate 50;
+\end_layout
+
+\begin_layout Plain Layout
+
+species "H2 OH H2O O2";
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+//Scalar Dissipation Rate PDF 
+\end_layout
+
+\begin_layout Plain Layout
+
+pdf "dirac";
+\end_layout
+
+\begin_layout Plain Layout
+
+sigma 1.31;
+\end_layout
+
+\begin_layout Plain Layout
+
+points 30;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+// Equation constants 
+\end_layout
+
+\begin_layout Plain Layout
+
+sigmat 0.85; 
+\end_layout
+
+\begin_layout Plain Layout
+
+Cg 2.86; 
+\end_layout
+
+\begin_layout Plain Layout
+
+Cd 2.00; 
+\end_layout
+
+\begin_layout Plain Layout
+
+Cx 2.00; 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\family sans
+flameletsProperties
+\family default
+ dictionary
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:flameletsProperties-dictionary"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A first group of options is used to specifies the main information about
+ the management of look-up table:
+\end_layout
+
+\begin_layout Itemize
+
+\family sans
+libraryPath
+\family default
+: path to the folder containing the look-up table
+\end_layout
+
+\begin_layout Itemize
+
+\family sans
+adiabaticMode
+\family default
+: if this option is turned on the calculation is performed in adiabatic
+ mode, even if the look-up table is non-adiabatic
+\end_layout
+
+\begin_layout Itemize
+
+\family sans
+varianceEquation
+\family default
+: if this option is turned off, the variance of mixture fraction is not
+ transported, but calculated using an algebraic expression 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Cuoci2007a"
+
+\end_inset
+
+ (this saves computational time, but the predictions are expected to be
+ less accurate)
+\end_layout
+
+\begin_layout Itemize
+
+\family sans
+propertyUpdate
+\family default
+: this options specifies the number of iterations to update the extractions
+ of data from the look-up table.
+ A large number saves computational time, but the stability of calculations
+ can be negatively affected
+\end_layout
+
+\begin_layout Itemize
+
+\family sans
+massFractionsUpdate
+\family default
+: this options specifies the number of iterations to update the extractions
+ of species from the look-up table.
+ This number has no effect on the stability of calculations, since species
+ mass fractions are not involved in the numerical solution, but are useful
+ only for post-processing purposes
+\end_layout
+
+\begin_layout Itemize
+
+\family sans
+species:
+\family default
+ list of species to be written on file for post-processing
+\end_layout
+
+\begin_layout Standard
+The second group of options is used to specify the main features of scalar
+ dissipation rate probability distribution:
+\end_layout
+
+\begin_layout Itemize
+
+\family sans
+pfd:
+\family default
+ kind of probability distribution function to be used (
+\family sans
+dirac
+\family default
+ or 
+\family sans
+logNormal
+\family default
+ options are available)
+\end_layout
+
+\begin_layout Itemize
+
+\family sans
+sigma:
+\family default
+ variance of log-normal distribution (if 
+\family sans
+logNormal
+\family default
+ option is turned on)
+\end_layout
+
+\begin_layout Itemize
+
+\family sans
+points:
+\family default
+ number of discretization points in the mixture fraction space when logNormal
+ option is turned on
+\end_layout
+
+\begin_layout Standard
+The third group of options specifies the semi-empirical constants to be
+ used in the transport equations:
+\end_layout
+
+\begin_layout Itemize
+
+\family sans
+sigmat:
+\family default
+ Prandtl number in mixture fraction, variance of mixture fraction and enthalpy
+ transport equations
+\end_layout
+
+\begin_layout Itemize
+
+\family sans
+Cg:
+\family default
+ semi-empirical constant in transport equations
+\end_layout
+
+\begin_layout Itemize
+
+\family sans
+Cd:
+\family default
+ semi-empirical constant in transport equations
+\end_layout
+
+\begin_layout Itemize
+
+\family sans
+Cx:
+\family default
+ semi-empirical constant in transport equations
+\end_layout
+
+\begin_layout Subsubsection*
+Initial and boundary conditions
+\end_layout
+
+\begin_layout Standard
+Initial and boundary conditions must be specified for pressure (
+\family sans
+p
+\family default
+), velocity (
+\family sans
+U
+\family default
+) and temperature (
+\family sans
+T
+\family default
+) in the usual way.
+ In addition initial and boundary conditions must be specified for the following
+ variables:
+\end_layout
+
+\begin_layout Itemize
+
+\family sans
+mixture fraction (csi):
+\family default
+ at fuel inlet mixture fraction is equal to 1, while at oxidizer inlet its
+ value is equal to 0; at walls a 
+\family sans
+zeroGradient
+\family default
+ condition must be specified;
+\end_layout
+
+\begin_layout Itemize
+
+\family sans
+variance of mixture fraction (csiv2):
+\family default
+ at inlets variance of mixture fraction is usually equal to 0; at walls
+ a 
+\family sans
+zeroGradient
+\family default
+ condition must be specified;
+\end_layout
+
+\begin_layout Itemize
+
+\family sans
+enthalpy (H):
+\family default
+ values of mass specific enthalpy at fuel and oxidizer inlets are required;
+ this values can be read from video output when the 
+\family sans
+rhoSimpleFoamFlamelets
+\family default
+ application starts (before the first iteration), as reported in Figure
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:inletValuesOfEnthalpy"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset listings
+lstparams "basicstyle={\footnotesize\sffamily},language={C++}"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+...
+\end_layout
+
+\begin_layout Plain Layout
+
+Calculate (first time)...
+   
+\end_layout
+
+\begin_layout Plain Layout
+
+Fuel  enthalpy:    -43890.3 J/kg  
+\end_layout
+
+\begin_layout Plain Layout
+
+Oxid.
+ enthalpy:    -101000 J/kg  
+\end_layout
+
+\begin_layout Plain Layout
+
+Fuel  temperature: 295 K  
+\end_layout
+
+\begin_layout Plain Layout
+
+Oxid.
+ temperature: 294 K 
+\end_layout
+
+\begin_layout Plain Layout
+
+Preparing field rho (density)...
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+Preparing additional scalr fields (references)
+\end_layout
+
+\begin_layout Plain Layout
+
+...
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Inlet values of enthalpy
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:inletValuesOfEnthalpy"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Output
+\end_layout
+
+\begin_layout Standard
+Several fields are written in output folders:
+\end_layout
+
+\begin_layout Itemize
+
+\family sans
+as:
+\family default
+ Planck mean absorption coefficient in 
+\begin_inset Formula $1/m$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\family sans
+chi_st:
+\family default
+ scalar dissipation rate at stoichiometric condition in 
+\begin_inset Formula $1/s$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\family sans
+csi:
+\family default
+ Favre-averaged mixture fraction
+\end_layout
+
+\begin_layout Itemize
+
+\family sans
+csiv2:
+\family default
+ Favre-averaged variance of mixture fraction
+\end_layout
+
+\begin_layout Itemize
+
+\family sans
+epsilon:
+\family default
+ Favre-averaged dissipation velocity turbulent kinetic energy in 
+\begin_inset Formula $m^{2}/s^{3}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\family sans
+H:
+\family default
+ Favre-averaged mass specific enthalpy in 
+\begin_inset Formula $J/kg$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\family sans
+k:
+\family default
+ Favre-averaged turbulent kinetic energy in 
+\begin_inset Formula $m^{2}/s^{2}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\family sans
+omega_YY:
+\family default
+ Favre-averaged mass fraction of species YY
+\end_layout
+
+\begin_layout Itemize
+
+\family sans
+p:
+\family default
+ pressure in 
+\begin_inset Formula $Pa$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\family sans
+phiH:
+\family default
+ enthalpy defect in 
+\begin_inset Formula $J/kg$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\family sans
+Qrad:
+\family default
+ radiative heat transfer in 
+\begin_inset Formula $W/m^{3}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\family sans
+rho:
+\family default
+ Reynolds-averaged density in 
+\begin_inset Formula $kg/m^{3}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\family sans
+T:
+\family default
+ Favre-averaged temperature in 
+\begin_inset Formula $K$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+rhoPisoFoamFlamelets
+\end_layout
+
+\begin_layout Standard
+The 
+\family sans
+rhoPisoFoamFlamelets
+\family default
+ solver is the unsteady version of 
+\family sans
+rhoSimpleFoamFlamelets
+\family default
+ solver described in the previous section.
+ The input and output files are the same.
+ The only difference is the definition of numerical schemes in 
+\family sans
+fvSolution
+\family default
+ and 
+\family sans
+fvSchemes
+\family default
+ dictionaries.
+\end_layout
+
+\begin_layout Subsection
+
+\family sans
+rhoSimpleFoamPostProcessor2E
+\end_layout
+
+\begin_layout Standard
+The 
+\family sans
+rhoSimpleFoamPostProcessor2E
+\family default
+ solver is used as a post-processor tool to estimate formation of soot in
+ turbulent non premixed flames.
+ It can be directly applied to the simulation results from 
+\family sans
+rhoSimpleFoamFlamelets
+\family default
+ solver, but in principle it can be used on solutions obtained using different
+ solvers.
+ The 
+\family sans
+rhoSimpleFoamPostProcessor2E
+\family default
+ can be applied using two different approaches:
+\end_layout
+
+\begin_layout Itemize
+mean approach: solver needs as input the velocity (
+\family sans
+U
+\family default
+), pressure (
+\family sans
+p
+\family default
+), temperature (
+\family sans
+T
+\family default
+) fields, together with composition fields of acetylene (
+\family sans
+omega_C2H2
+\family default
+), oxygen (
+\family sans
+omega_O2
+\family default
+), hydrogen (
+\family sans
+omega_H2
+\family default
+), OH radical (
+\family sans
+omega_OH
+\family default
+); no look-up tables are required;
+\end_layout
+
+\begin_layout Itemize
+uncorrelated approach: solver needs as input the velocity (
+\family sans
+U
+\family default
+), pressure (
+\family sans
+p
+\family default
+) and temperature (
+\family sans
+T
+\family default
+) fields, together with mixture fraction (
+\family sans
+csi
+\family default
+) and variance of mixture fraction (
+\family sans
+csiv2
+\family default
+).
+\end_layout
+
+\begin_layout Standard
+In both cases two additional transport equations for soot particle number
+ density (
+\family sans
+phiN
+\family default
+) and soot mass fraction (
+\family sans
+phiM
+\family default
+) are solved.
+ Additional information is reported in Chapter 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "cha:Soot-post-processing"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+sootPostProcessing Dictionary
+\end_layout
+
+\begin_layout Standard
+In 
+\family sans
+sootPostProcessing
+\family default
+ dictionary (Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Example-of-sootPostProcessing"
+
+\end_inset
+
+) the user can choose the main options for managing soot post-processing
+ operations:
+\end_layout
+
+\begin_layout Itemize
+
+\family sans
+sigmat:
+\family default
+ Prandtl number used in transport equations of 
+\family sans
+phiN
+\family default
+ and 
+\family sans
+phiM
+\end_layout
+
+\begin_layout Itemize
+
+\family sans
+sootUpdate:
+\family default
+ number of iterations to update soot source terms in 
+\family sans
+phiN
+\family default
+ and 
+\family sans
+phiM
+\family default
+ equations
+\end_layout
+
+\begin_layout Itemize
+
+\family sans
+sootRobust:
+\family default
+ if this option is turned on, soot sink terms are evaluated using a more
+ robust approach (this increases stability, but computational time is larger)
+\end_layout
+
+\begin_layout Itemize
+
+\family sans
+sootClosure: 
+\family default
+closure approach for soot source terms (
+\family sans
+Mean
+\family default
+ and 
+\family sans
+Uncorrelated
+\family default
+ options are available)
+\end_layout
+
+\begin_layout Itemize
+
+\family sans
+nucleationModel:
+\family default
+ numerical model for nucleation of soot particles.
+ Available options are: 
+\family sans
+Liu_2001
+\family default
+, 
+\family sans
+Liu_2002
+\family default
+, 
+\family sans
+Moss_1999
+\family default
+, 
+\family sans
+Wen_2003
+\family default
+, 
+\family sans
+Lindstedt_1994
+\family default
+ and 
+\family sans
+Leung_1991
+\family default
+.
+\end_layout
+
+\begin_layout Itemize
+
+\family sans
+growthModel:
+\family default
+ numerical model for molecular growth of soot particles.
+ Available options are: 
+\family sans
+None, Liu_2001
+\family default
+, 
+\family sans
+Liu_2002
+\family default
+, 
+\family sans
+Moss_1999
+\family default
+, 
+\family sans
+Wen_2003
+\family default
+, 
+\family sans
+Lindstedt_1994
+\family default
+ and 
+\family sans
+Leung_1991
+\family default
+.
+\end_layout
+
+\begin_layout Itemize
+
+\family sans
+oxidationModel:
+\family default
+ numerical model for oxidation of soot particles.
+ Available options are: 
+\family sans
+None, Lee
+\family default
+, 
+\family sans
+NSC
+\family default
+ and 
+\family sans
+Neoh
+\family default
+.
+\end_layout
+
+\begin_layout Itemize
+
+\family sans
+aggregationModel:
+\family default
+ numerical model for aggregation of soot particles.
+ Available options are: 
+\family sans
+None
+\family default
+, 
+\family sans
+Smoluchowski
+\family default
+ and 
+\family sans
+Moss
+\family default
+.
+\end_layout
+
+\begin_layout Itemize
+
+\family sans
+libraryPath:
+\family default
+ path to folder containing the soot look-up table (only if 
+\family sans
+sootClosure
+\family default
+ option is equal to 
+\family sans
+Mean
+\family default
+)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset listings
+lstparams "basicstyle={\footnotesize\sffamily},language={C++}"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+sigmat 		0.85;
+\end_layout
+
+\begin_layout Plain Layout
+
+sootUpdate 	5;
+\end_layout
+
+\begin_layout Plain Layout
+
+sootRobust 	on;
+\end_layout
+
+\begin_layout Plain Layout
+
+sootClosure	"Uncorrelated";
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+nucleationModel   "Liu_2002"; 	
+\end_layout
+
+\begin_layout Plain Layout
+
+growthModel       "Liu_2002"; 	
+\end_layout
+
+\begin_layout Plain Layout
+
+oxidationModel    "NSC"; 	
+\end_layout
+
+\begin_layout Plain Layout
+
+aggregationModel  "Smoluchowski";
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+libraryPath       "../PDF-Library-Soot";
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Example of 
+\family sans
+sootPostProcessing
+\family default
+ dictionary
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Example-of-sootPostProcessing"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Initial and boundary conditions
+\end_layout
+
+\begin_layout Standard
+Initial and boundary conditions must be specified for 
+\family sans
+phiN
+\family default
+ and 
+\family sans
+phiM.
+ 
+\family default
+At inlet streams of fuel and oxidizer a fixed value must be specified.
+ If the inlet streams are assumed soot free, it is suggested to use the
+ inlet values reported on video when post-processing calculations are started
+ (Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:Inlet-values-of-phiN"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset listings
+lstparams "basicstyle={\footnotesize\sffamily},language={C++}"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+...
+\end_layout
+
+\begin_layout Plain Layout
+
+OpenSMOKE_SootEmpiricalModels 
+\end_layout
+
+\begin_layout Plain Layout
+
+Nucleation: 2 
+\end_layout
+
+\begin_layout Plain Layout
+
+Growth: 2 
+\end_layout
+
+\begin_layout Plain Layout
+
+Oxidation: 2 
+\end_layout
+
+\begin_layout Plain Layout
+
+Aggregation: 1 
+\end_layout
+
+\begin_layout Plain Layout
+
+Diameter (primary particles): 2.4 nm 
+\end_layout
+
+\begin_layout Plain Layout
+
+Mass (primary particles): 8407.7 kg/kmol 
+\end_layout
+
+\begin_layout Plain Layout
+
+Nuclei (primary particles): 700 
+\end_layout
+
+\begin_layout Plain Layout
+
+PhiM(@1kg/m3): 1.92759e-11 
+\end_layout
+
+\begin_layout Plain Layout
+
+PhiN(@1kg/m3): 2.29412e-15
+\end_layout
+
+\begin_layout Plain Layout
+
+...
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Inlet values of 
+\family sans
+phiM
+\family default
+ and 
+\family sans
+phiN
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Inlet-values-of-phiN"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Output
+\end_layout
+
+\begin_layout Standard
+The following fields are written in output folders:
+\end_layout
+
+\begin_layout Itemize
+
+\family sans
+fv:
+\family default
+ soot particles volume fraction
+\end_layout
+
+\begin_layout Itemize
+
+\family sans
+dSoot:
+\family default
+ mean diameter of soot particles in 
+\begin_inset Formula $m$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\family sans
+n0:
+\family default
+ number of soot particle per volume unit in 
+\begin_inset Formula $1/m^{3}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\family sans
+Sn:
+\family default
+ source term for phiN transport equation 
+\begin_inset Formula $kmol/m^{3}/s$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\family sans
+Sm:
+\family default
+ source term for phiM transport equation 
+\begin_inset Formula $kg/m^{3}/s$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+
+\family sans
+Asoot:
+\family default
+ soot particle specific area in 
+\begin_inset Formula $1/m$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+Flamelet Theory
+\end_layout
+
+\begin_layout Standard
+The governing equations of steady laminar flamelets are reported and briefly
+ discussed in the following.
+ Some details about the numerical methods employed for their solution are
+ given and the methodology adopted for the construction of the flamelet
+ library is summarized.
+\end_layout
+
+\begin_layout Section
+Governing equations of laminar, steady flamelets 
+\end_layout
+
+\begin_layout Standard
+The steady laminar flamelet equations can be derived from the equations
+ describing the counter flow diffusion flames, by adopting an appropriate
+ transformation from the physical space to mixture fraction space (with
+ 
+\begin_inset Formula $Z$
+\end_inset
+
+ as the independent variable).
+ The mathematical procedure and the assumption needed for such transformation
+ are described in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Pitsch1998"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Poinsot2001"
+
+\end_inset
+
+ and are not here repeated.
+ In the present approach a simplified set of the mixture fraction space
+ equations is solved, according to the suggestions reported in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Pitsch1996"
+
+\end_inset
+
+.
+ In the following the conservation equations of species and energy in the
+ mixture fraction space are reported:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+\frac{1}{2}\rho\chi\frac{d^{2}\omega_{k}}{dZ^{2}}+\Omega_{k}=0\label{eq:flamelets_mass_fractions}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+\frac{1}{2}\rho\chi\frac{d^{2}T}{dZ^{2}}-\frac{1}{C_{P}}\sum\hat{H}_{k}\Omega_{k}+\frac{1}{2C_{P}}\rho\chi\left[\frac{dC_{P}}{dZ}+\sum C_{P,k}\frac{d\omega_{k}}{dZ}\right]\frac{dT}{dZ}=0\label{eq:flamelets_temperature}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The boundary conditions for the fuel (F) and oxidizer (O) sides are:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+Fuel\, side\,\,(Z=1)\,\,\,\,\left\{ \begin{array}{c}
+\omega_{k}=\omega_{k,F}\\
+T=T_{F}\end{array}\right.\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+Oxidizer\, side\,\,(Z=0)\,\,\,\,\left\{ \begin{array}{c}
+\omega_{k}=\omega_{k,O}\\
+T=T_{O}\end{array}\right.\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In the Equations reported above, 
+\begin_inset Formula $\chi$
+\end_inset
+
+ is the scalar dissipation rate, which must be modeled across the flamelet.
+ Several approaches are assumed.
+ The most appropriate is an extension of a simpler expression 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Peters1984"
+
+\end_inset
+
+ to variable density flows:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+\chi\left(Z\right)=\frac{a_{S}}{4\pi}\frac{3\left(\sqrt{\frac{\rho_{O}}{\rho}}+1\right)^{2}}{2\sqrt{\frac{\rho_{O}}{\rho}}+1}exp\left[-2\left(erfc^{-1}\left(2Z\right)\right)^{2}\right]\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $a_{S}$
+\end_inset
+
+ is the characteristic strain rate, 
+\begin_inset Formula $erfc^{-1}$
+\end_inset
+
+ is the inverse complementary error function and 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
+\color none
+
+\begin_inset Formula $\rho_{O}$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\noun default
+\color inherit
+ is the density of the oxidizer stream.
+\end_layout
+
+\begin_layout Subsection
+Extension to non adiabatic combustion
+\end_layout
+
+\begin_layout Standard
+The extension to non adiabatic combustion requires the introduction of the
+ enthalpy defect 
+\begin_inset Formula $\phi_{H}$
+\end_inset
+
+, which is defined as the difference between the actual enthalpy 
+\begin_inset Formula $\hat{H}$
+\end_inset
+
+ and the enthalpy for an adiabatic flame: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+\phi_{H}=\hat{H}-\left[\hat{H}_{O}-Z\left(\hat{H}_{F}-\hat{H}_{O}\right)\right]\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $\hat{H}_{O}$
+\end_inset
+
+ and 
+\begin_inset Formula $\hat{H}_{F}$
+\end_inset
+
+ denotes respectively the enthalpy of oxidizer and fuel streams.
+ A set of laminar flamelets profiles, at different scalar dissipation rates,
+ must be calculated at several fixed values of enthalpy defect.
+ The profiles are organized in shelves, where each shelf contains entries
+ referring to values of 
+\begin_inset Formula $\chi_{st}$
+\end_inset
+
+ (scalar dissipation rate at stoichiometric conditions), ranging from equilibriu
+m to extinction, plus the pure-mixing (or inert) state, and each shelf refers
+ to a different value of enthalpy defect.
+ Assuming the hypotheses of equal diffusivities, it is relatively easy to
+ calculate the new flamelet profiles corresponding to the assigned enthalpy
+ defect 
+\begin_inset Formula $\phi_{H}$
+\end_inset
+
+.
+ If the same value of the enthalpy defect is enforced at both the fuel and
+ oxidizer sides, the enthalpy defect is uniform across the whole flamelet.
+ Many commercial codes assume that flamelet species profiles are unaffected
+ by enthalpy defect, which means that for each enthalpy defect in the flamelet
+ library the species profiles are assumed to be the same for the adiabatic
+ flamelet; only the temperature profile is updated, using a simplified approach,
+ which avoids to recalculate a new set of flamelets 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Muller1994,Binninger1998"
+
+\end_inset
+
+.
+ The main disadvantage of this approach is that the effect of the heat losses
+ on the species mass fractions is not taken into account.
+ On the contrary, libOpenSMOKE utilities recalculate from scratch the flamelet
+ profiles (both for temperature and mass fractions) for each enthalpy defect.
+ This approach is very accurate, but requires the calculation of a very
+ large number of laminar flamelet profiles.
+ For example if ~10 enthalpy defects are considered and for each of them
+ ~20 flamelet profiles are generated, the overall number of flamelets to
+ be generated is ~200.
+\end_layout
+
+\begin_layout Subsection
+Transient solution method 
+\end_layout
+
+\begin_layout Standard
+The overall model consists of a differential system of the conservation
+ equations with boun­dary conditions for the dependent variables.
+ The numerical solution of the overall system corresponding to differential
+ equations 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:centered_fd"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:flamelets_temperature_transsient"
+
+\end_inset
+
+ requires particular attention.
+ In the present thesis the equations
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:centered_fd"
+
+\end_inset
+
+ and 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:flamelets_temperature_transsient"
+
+\end_inset
+
+ are solved in a transient form, which is obtained by adding the corresponding
+ time derivatives, in order to obtain a parabolic system of partial differential
+ equations, rather than an ordinary differential equation boundary value
+ system.
+ The transient equations are reported in the following and are solved for
+ a time which is long enough to reach steady state conditions:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+\rho\frac{d\omega_{k}}{dZ}=\frac{1}{2}\rho\chi\frac{d^{2}\omega_{k}}{dZ^{2}}+\Omega_{k}=0\label{eq:flamelets_mass_fractions_transient}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+\rho\frac{dT}{dZ}=\frac{1}{2}\rho\chi\frac{d^{2}T}{dZ^{2}}-\frac{1}{C_{P}}\sum\hat{H}\Omega_{k}+\frac{1}{2C_{P}}\rho\chi\left[\frac{dC_{P}}{dZ}+\sum C_{P,k}\frac{d\omega_{k}}{dZ}\right]\frac{dT}{dZ}=0\label{eq:flamelets_temperature_transsient}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Finite difference discretization
+\end_layout
+
+\begin_layout Standard
+The equations reported above are discretized by means of a non uniform spatial
+ grid, in order to obtain a system of ordinary differential equations.
+ The adopted discretization uses conventional finite differencing techniques
+ for non-uniform mesh spacing:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+\frac{d\omega_{k,,j}}{dZ}=\frac{1}{2}\chi_{j}\frac{\frac{\omega_{k,j+1}-\omega_{k,j}}{Z_{j+1}-Z_{j}}-\frac{\omega_{k,j}-\omega_{k,j-1}}{Z_{j}-Z_{j-1}}}{\frac{1}{2}\left(Z_{j+1}-Z_{j-1}\right)}+\frac{\Omega_{k,j}}{\rho_{j}}=0\label{eq:flamelets_mass_fractions_fd}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{multline}
+\frac{dT_{j}}{dZ}=\frac{1}{2}\chi_{j}\frac{\frac{T_{j+1}-T_{j}}{Z_{j+1}-Z_{j}}-\frac{T_{j}-T_{j-1}}{Z_{j}-Z_{j-1}}}{\frac{1}{2}\left(Z_{j+1}-Z_{j-1}\right)}+\frac{\sum\hat{H}_{k,j}\Omega_{k,j}}{\rho_{j}C_{P,j}}+\\
+\frac{\chi_{j}}{2C_{P,j}}\left[\left.\frac{dC_{P}}{dZ}\right|_{j}^{cen}+\sum C_{P,k}\left.\frac{d\omega_{k}}{dZ}\right|_{j}^{cen}\right]\left.\frac{dT}{dZ}\right|_{j}^{cen}=0\label{eq:flamelets_temperature_fd}\end{multline}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where the first derivative are discretized using the central differencing
+ scheme:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{multline}
+\left.\frac{d\psi}{dZ}\right|_{j}^{cen}=\psi_{j-1}\frac{Z_{j+1}-Z_{j}}{\left(Z_{j}-Z_{j-1}\right)\left(Z_{j+1}-Z_{j-1}\right)}+\\
+\psi_{j}\frac{Z_{j-1}-2Z_{j}+Z_{j+1}}{\left(Z_{j+1}-Z_{j}\right)\left(Z_{j}-Z_{j-1}\right)}+\psi_{j+1}\frac{Z_{j}-Z_{j-1}}{\left(Z_{j+1}-Z_{j}\right)\left(Z_{j+1}-Z_{j-1}\right)}=0\label{eq:centered_fd}\end{multline}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Non adiabatic flamelet library construction 
+\end_layout
+
+\begin_layout Standard
+After flamelet generation, the flamelet profiles are convoluted with assumed-sha
+pe PDFs and then tabulated for look-up in the CFD code.
+ The instantaneous value of any state quantity 
+\begin_inset Formula $\psi$
+\end_inset
+
+ inside a flamelet can be expressed as a function of the mixture fraction
+ 
+\begin_inset Formula $Z$
+\end_inset
+
+, the scalar dissipation rate 
+\begin_inset Formula $\chi_{st}$
+\end_inset
+
+  and the enthalpy defect 
+\begin_inset Formula $\phi_{H}$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+\psi=\psi\left(Z,\chi_{st},\phi_{H}\right)\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The corresponding mean value can be obtained by introducing the joint-PDF
+ 
+\begin_inset Formula $P\left(Z,\chi_{st},\phi_{H}\right)$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+\widetilde{\psi}=\int_{-\infty}^{\infty}\int_{0}^{\infty}\int_{0}^{1}\psi\left(Z,\chi_{st},\phi_{H}\right)P\left(Z,\chi_{st},\phi_{H}\right)dZ\cdot d\chi_{st}\cdot d\phi_{H}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In presumed PDF approach, a shape for the joint-PDF 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
+\color none
+
+\begin_inset Formula $P\left(Z,\chi_{st},\phi_{H}\right)$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\noun default
+\color inherit
+ is assigned on empirical basis.
+ Many experimental and numerical evidences 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Bilger1988,Peters1984"
+
+\end_inset
+
+, indicated that mixture fraction and scalar dissipation rate are statistically
+ independent.
+ According to the suggestions proposed by Bray and Peters 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Bray1994"
+
+\end_inset
+
+, the joint-PDF can be split in the product of three PDF’s of a single variable:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+P\left(Z,\chi_{st},\phi_{H}\right)=P\left(Z\right)P\left(\chi_{st}\right)P\left(\phi_{H}\right)\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+According to Bilger 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Bilger1980"
+
+\end_inset
+
+, the result of integration with respect to the mixture fraction is relatively
+ insensitive to the details of the PDF shape, if it is chosen on physical
+ grounds.
+ Usually a 
+\begin_inset Formula $\beta$
+\end_inset
+
+-PDF or a clipped-Gaussian PDF are adopted.
+ The integration with respect to 
+\begin_inset Formula $\chi_{st}$
+\end_inset
+
+ is not a problem, as all evidence unanimously indicates a log-normal distributi
+on for the shape of the associated PDF.
+ The enthalpy defect PDF is usually assumed to be a Dirac delta function
+ centered on the local mean value of enthalpy defect 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Marracino1997"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+The 
+\begin_inset Formula $\beta$
+\end_inset
+
+-PDF
+\end_layout
+
+\begin_layout Standard
+The 
+\begin_inset Formula $\beta$
+\end_inset
+
+-PDF is the most used approach for modeling the mixture fraction PDF, which
+ is described by the following function:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+P\left(Z\right)=\frac{Z^{a-1}\left(1-Z\right)^{b-1}}{\int_{0}^{1}Z^{a-1}\left(1-Z\right)^{b-1}dZ}=\frac{\beta\left(Z\right)}{\int_{0}^{1}\beta\left(Z\right)dZ}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $a$
+\end_inset
+
+ and 
+\begin_inset Formula $b$
+\end_inset
+
+ are two non-negative parameters and are related to the mean 
+\begin_inset Formula $\widetilde{Z}$
+\end_inset
+
+ 
+\begin_inset Formula $ $
+\end_inset
+
+and the variance of the mixture fraction 
+\begin_inset Formula $\widetilde{Z^{''2}}$
+\end_inset
+
+, calculated by the solver: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+a=\widetilde{Z}\left[\frac{\widetilde{Z}\left(1-\widetilde{Z}\right)}{\widetilde{Z^{''2}}}-1\right]\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+b=\left(1-\widetilde{Z}\right)\left[\frac{\widetilde{Z}\left(1-\widetilde{Z}\right)}{\widetilde{Z^{''2}}}-1\right]\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In general the distribution is asymmetric, but approaches a symmetric Gaussian
+ shape when the ratios 
+\begin_inset Formula $\sqrt{\widetilde{Z^{''2}}}/\widetilde{Z}$
+\end_inset
+
+ and 
+\begin_inset Formula $\sqrt{\widetilde{Z^{''2}}}/\left(1-\widetilde{Z}\right)$
+\end_inset
+
+ are small.
+\end_layout
+
+\begin_layout Subsection
+The Clipped-Gaussian PDF
+\end_layout
+
+\begin_layout Standard
+The clipped Gaussian PDF is based upon the clipping of a Gaussian function
+ so that the probability is finite only in the allowable region of mixture
+ fraction.
+ A clipped Gaussian PDF contains a Gaussian distribution for the turbulent
+ region 
+\begin_inset Formula $0<Z<1$
+\end_inset
+
+ and Dirac delta functions for the intermittent appearance of unmixed fluid
+ at 
+\begin_inset Formula $Z=0$
+\end_inset
+
+ and 
+\begin_inset Formula $Z=1$
+\end_inset
+
+.
+ In Favre form it is given by:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+P\left(Z\right)=a_{1}\delta\left(Z\right)+\left(1-a_{1}-a_{2}\right)\frac{G\left(Z\right)}{I_{G}}+a_{2}\delta\left(1-Z\right)\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $\delta\left(Z-Z_{0}\right)$
+\end_inset
+
+ is the Dirac delta function centered in 
+\begin_inset Formula $Z=Z_{0}$
+\end_inset
+
+, whose integral is unity if 
+\begin_inset Formula $Z=Z_{0}$
+\end_inset
+
+ and is zero otherwise; the variable 
+\begin_inset Formula $I_{G}$
+\end_inset
+
+ is defined as:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+I_{G}=\int_{0}^{1}G\left(Z\right)dZ\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The unknown free parameters 
+\begin_inset Formula $a_{1},a_{2}$
+\end_inset
+
+, and variance 
+\begin_inset Formula $g$
+\end_inset
+
+ of the Gaussian distribution, which are function of the mean 
+\begin_inset Formula $\widetilde{Z}$
+\end_inset
+
+ and the variance of the mixture fraction 
+\begin_inset Formula $\widetilde{Z^{''2}}$
+\end_inset
+
+, can be evaluated using the computationally inexpensive method suggested
+ by Cleary 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Cleary2004"
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+g=min\left[\widetilde{Z^{''2}},\left(\frac{\tilde{Z}}{2}\right)^{2},\left(\frac{1-\tilde{Z}}{2}\right)^{2}\right]\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+G\left(Z\right)=\left\{ \begin{array}{c}
+\frac{1}{\sqrt{2\pi g}}exp\left(-\frac{\left(Z-\widetilde{Z}\right)^{2}}{2g}\right)\\
+0\end{array}\right.\begin{array}{c}
+for\,\,\,\frac{\left|Z-\widetilde{Z}\right|}{\sqrt{g}}\leq2\\
+for\,\,\,\frac{\left|Z-\widetilde{Z}\right|}{\sqrt{g}}>2\end{array}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+a_{1}=\left(1-\frac{\widetilde{Z}\left(1-\widetilde{Z}\right)-\widetilde{Z^{''2}}}{\widetilde{Z}\left(1-\widetilde{Z}\right)-g}\right)\left(1-\widetilde{Z}\right)\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+a_{2}=\left(1-\frac{\widetilde{Z}\left(1-\widetilde{Z}\right)-\widetilde{Z^{''2}}}{\widetilde{Z}\left(1-\widetilde{Z}\right)-g}\right)\widetilde{Z}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+The log-normal distribution 
+\end_layout
+
+\begin_layout Standard
+The log-normal distribution is largely used for describing the PDF of scalar
+ dissipation rate:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+P\left(\chi_{st}\right)=\frac{1}{\sqrt{2\pi}}\frac{1}{\sigma\chi_{st}}exp\left(-\frac{1}{2\sigma^{2}}\left(ln\frac{\chi_{st}}{\widetilde{\chi_{st}}}-\frac{\sigma^{2}}{2}\right)^{2}\right)\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where it is assumed that 
+\begin_inset Formula $\sigma=2$
+\end_inset
+
+ (according to the experimental results by Sreenivasan et al.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Sreenivasan1977"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Subsubsection
+Numerical integration
+\end_layout
+
+\begin_layout Standard
+The numerical integration with respect to the enthalpy defect is straightforward
+, because the associated PDF is simply a Dirac delta function:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{multline}
+\widetilde{\psi}=\int_{-\infty}^{\infty}\int_{0}^{\infty}\int_{0}^{1}\psi\left(Z,\chi_{st},\phi_{H}\right)P\left(Z\right)P\left(\chi_{st}\right)\delta\left(\phi_{H}-\widetilde{\phi_{H}}\right)dZ\cdot d\chi_{st}\cdot d\phi_{H}=\\
+\int_{0}^{\infty}\int_{0}^{1}\psi\left(Z,\chi_{st},\widetilde{\phi_{H}}\right)P\left(Z\right)P\left(\chi_{st}\right)dZ\cdot d\chi_{st}\end{multline}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+On the contrary, the numerical integration with respect to the mixture fraction
+ and the scalar dissipation requires attention and must be performed in
+ an accurate and inexpensive way:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+\widetilde{\psi}=\int_{0}^{\infty}P\left(\chi_{st}\right)d\chi_{st}\int_{0}^{1}\psi\left(Z,\chi_{st},\widetilde{\phi_{H}}\right)P\left(Z\right)dZ\label{eq:integration_psi}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Integration with respect to Z.
+ Let us focus the attention on the evaluation of the integral 
+\begin_inset Formula $\int_{0}^{1}\psi\left(Z,\chi_{st},\widetilde{\phi_{H}}\right)P\left(Z\right)dZ$
+\end_inset
+
+ with respect the mixture fraction.
+ For the clipped Gaussian PDF the numerical evaluation of such integral
+ is relatively simple, due to the absence of singularities and can be obtained
+ using the usual quadrature formulas 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Hildebrand1987"
+
+\end_inset
+
+.
+ However, while the formulation of the 
+\begin_inset Formula $\beta$
+\end_inset
+
+-PDF looks simple compared to the clipped Gaussian, the need to numerically
+ determine the integral reported above can be computationally expensive.
+ The numerical integration of the -PDF encounters difficulties due to the
+ singularity problem at either the oxidizer side (O) or the fuel side (F),
+ depending on the parameters 
+\family sans
+a
+\family default
+ and 
+\family sans
+b
+\family default
+, and the overflow problem when the PDF parameters are sufficiently large:
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+\int_{0}^{1}\psi\left(Z,\chi_{st},\widetilde{\phi_{H}}\right)P\left(Z\right)dZ=\frac{\int_{0}^{1}\psi\left(Z,\chi_{st},\widetilde{\phi_{H}}\right)\beta\left(Z\right)dZ}{\int_{0}^{1}\beta\left(Z\right)dZ}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $\beta\left(Z\right)=Z^{a-1}\left(1-Z\right)^{b-1}$
+\end_inset
+
+.
+ Liu et al.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Liu2002"
+
+\end_inset
+
+ suggested to evaluate the integrals at numerator and denominator by using
+ the following approximate solution, which removes the singularities at
+ the boundaries of the integration domain: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{multline}
+\int_{0}^{1}\varphi\left(Z\right)\beta\left(Z\right)dZ=\int_{0}^{\varepsilon}\varphi\left(Z\right)\beta\left(Z\right)dZ+\int_{\varepsilon}^{1-\varepsilon}\varphi\left(Z\right)\beta\left(Z\right)dZ\\
++\int_{1-\varepsilon}^{1}\varphi\left(Z\right)\beta\left(Z\right)dZ\backsimeq\varphi_{ox}\frac{\varepsilon^{a}}{a}+\int_{\varepsilon}^{1-\varepsilon}\varphi\left(Z\right)\beta\left(Z\right)dZ+\varphi_{fuel}\frac{\varepsilon^{b}}{b}\end{multline}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $\varepsilon$
+\end_inset
+
+ is a small parameter (which is usually assumed to be 
+\begin_inset Formula $10^{-6}$
+\end_inset
+
+) and 
+\begin_inset Formula $\varphi\left(Z\right)$
+\end_inset
+
+ is a generic function which corresponds to for the integral at numerator
+ and to 
+\begin_inset Formula $1$
+\end_inset
+
+ for the integral at denominator.
+ The integral 
+\begin_inset Formula $\int_{\varepsilon}^{1-\varepsilon}\varphi\left(Z\right)\beta\left(Z\right)dZ$
+\end_inset
+
+ can be now numerically calculated using the conventional quadrature formulas
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Hildebrand1987"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Integration with respect to 
+\begin_inset Formula $\chi_{st}$
+\end_inset
+
+.
+ The integration with respect to 
+\begin_inset Formula $\chi_{st}$
+\end_inset
+
+ is simpler to perform.
+ In this work the approach suggested by Marracino and Lentini 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Marracino1997"
+
+\end_inset
+
+ is adopted.
+ From the 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:integration_psi"
+
+\end_inset
+
+, after the integration with respect to Z:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+\widetilde{\psi}=\int_{0}^{\infty}P\left(\chi_{st}\right)d\chi_{st}\int_{0}^{1}\psi\left(Z,\chi_{st},\widetilde{\phi_{H}}\right)P\left(Z\right)dZ=\int_{0}^{\infty}H\left(\widetilde{Z},\widetilde{Z^{''2}},\chi_{st},\widetilde{\phi_{H}}\right)P\left(\chi_{st}\right)d\chi_{st}\label{eq:integration_psi}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The integration range in 
+\begin_inset Formula $\chi_{st}$
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+is split into 
+\begin_inset Formula $L$
+\end_inset
+
+ sub ranges 
+\begin_inset Formula $\left[\chi_{l-\frac{1}{2}};\chi_{l+\frac{1}{2}}\right]$
+\end_inset
+
+, with 
+\begin_inset Formula $l=1,2,...,L$
+\end_inset
+
+ and 
+\begin_inset Formula $\chi_{l-\frac{1}{2}}=0$
+\end_inset
+
+
+\begin_inset Formula $ $
+\end_inset
+
+, such that 
+\begin_inset Formula $\chi_{l}$
+\end_inset
+
+ can be considered a representative value for the corresponding interval.
+ The integral is evaluated by the following approximation:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{multline}
+\int_{0}^{\infty}H\left(\widetilde{Z},\widetilde{Z^{''2}},\chi_{st},\widetilde{\phi_{H}}\right)P\left(\chi_{st}\right)d\chi_{st}=\sum_{l=1}^{L}\int_{\chi_{l-\frac{1}{2}}}^{\chi_{l+\frac{1}{2}}}H\left(\widetilde{Z},\widetilde{Z^{''2}},\chi_{st},\widetilde{\phi_{H}}\right)P\left(\chi_{st}\right)d\chi_{st}\backsimeq\\
+\sum_{l=1}^{L}H\left(\widetilde{Z},\widetilde{Z^{''2}},\chi_{st},\widetilde{\phi_{H}}\right)\int_{\chi_{l-\frac{1}{2}}}^{\chi_{l+\frac{1}{2}}}P\left(\chi_{st}\right)d\chi_{st}\label{DUPLICATE: eq:integration_psi}\end{multline}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The approximate evaluation of the integral reported above is not computationally
+ expensive and is accurate even with a limited number of points in the 
+\begin_inset Formula $\chi_{st}$
+\end_inset
+
+-space, contrary to the large number needed in the 
+\begin_inset Formula $Z$
+\end_inset
+
+-space.
+ Now we need to evaluate the integrals:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+\int_{\chi_{l-\frac{1}{2}}}^{\chi_{l+\frac{1}{2}}}P\left(\chi_{st}\right)d\chi_{st}=\int_{\chi_{l-\frac{1}{2}}}^{\chi_{l+\frac{1}{2}}}\frac{1}{\sqrt{2\pi}}\frac{1}{\sigma\chi_{st}}exp\left(-\frac{1}{2\sigma^{2}}\left(ln\frac{\chi_{st}}{\widetilde{\chi_{st}}}-\frac{\sigma^{2}}{2}\right)^{2}\right)d\chi_{st}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+By introducing the running integration variable 
+\begin_inset Formula $\theta=\frac{1}{\sqrt{2}\sigma}\left(ln\frac{\chi_{st}}{\widetilde{\chi_{st}}}-\frac{\sigma^{2}}{2}\right)$
+\end_inset
+
+, the integral becomes:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+\int_{\chi_{l-\frac{1}{2}}}^{\chi_{l+\frac{1}{2}}}\frac{1}{\sqrt{2\pi}}\frac{1}{\sigma\chi_{st}}exp\left(-\theta^{2}\right)d\chi_{st}=\frac{1}{\sqrt{\pi}}\int_{\theta_{l-\frac{1}{2}}}^{\theta_{l+\frac{1}{2}}}exp\left(-\theta^{2}\right)d\theta\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The integral reported above has an analytical solution, which is given by:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+\frac{1}{\sqrt{\pi}}\int_{\theta_{l-\frac{1}{2}}}^{\theta_{l+\frac{1}{2}}}exp\left(-\theta^{2}\right)d\theta=\frac{1}{2}\left[erf\left(\theta_{l+\frac{1}{2}}\right)-erf\left(\theta_{l-\frac{1}{2}}\right)\right]\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $erf$
+\end_inset
+
+ is the error function and: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+\theta_{l\pm\frac{1}{2}}=\frac{1}{\sqrt{2}\sigma}\left(ln\frac{\chi_{l\pm\frac{1}{2}}}{\widetilde{\chi_{st}}}-\frac{\sigma^{2}}{2}\right)\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+\begin_inset CommandInset label
+LatexCommand label
+name "cha:Soot-post-processing"
+
+\end_inset
+
+Soot post-processing
+\end_layout
+
+\begin_layout Section
+Method of moments 
+\end_layout
+
+\begin_layout Standard
+For a generic mono-dispersed number density function, the moment of order
+ 
+\family sans
+k
+\family default
+ is defined as:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+m_{k}\left(\mathbf{x};t\right)=\int_{0}^{\infty}\xi^{k}n\left(L;\mathbf{x};t\right)dL\label{eq:moments_eq}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+If Equation 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:moments_eq"
+
+\end_inset
+
+ is multiplied by 
+\begin_inset Formula $\xi^{k}$
+\end_inset
+
+ and integrated, the following balance equation for the moment of order
+ 
+\family sans
+k
+\family default
+ is obtained:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+\frac{\partial\widetilde{m_{k}}\left(\mathbf{x};t\right)}{\partial t}+\frac{\partial}{\partial x_{i}}\left[\widetilde{u_{i}}\cdot\widetilde{m_{k}}\left(\mathbf{x};t\right)\right]=\frac{\partial}{\partial x_{i}}\left[\Gamma_{t}\frac{\partial\widetilde{m_{k}}\left(\mathbf{x};t\right)}{\partial x_{i}}\right]+\widetilde{S}_{k}^{m}\left(\mathbf{x};t\right)\label{eq:moment_transport_equation}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The Standard Method of Moments (SSM) solves a set of transport equations
+ for a number of significant moments of the distribution.
+ This approach is feasible only is the source term 
+\begin_inset Formula $\widetilde{S}_{k}^{m}\left(\mathbf{x};t\right)$
+\end_inset
+
+ in Equation 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:moment_transport_equation"
+
+\end_inset
+
+ can be written using the moments which are tracked.
+ Unfortunately this is possible only for very simple systems or assuming
+ particular forms of the particle size distribution.
+ 
+\end_layout
+
+\begin_layout Subsection
+Modeling of soot formation
+\end_layout
+
+\begin_layout Standard
+The soot formation in turbulent flames is usually modeled using semi-empirical
+ models for describing the main processes of nucleation, growth, coagulation
+ and oxidation of soot particles.
+ The corresponding rate expressions can be written in terms of soot volume
+ fraction 
+\begin_inset Formula $f_{V}$
+\end_inset
+
+ (or mass fraction 
+\begin_inset Formula $\omega_{soot}$
+\end_inset
+
+) and total number density 
+\begin_inset Formula $m_{0}$
+\end_inset
+
+, assuming a mono dispersed distribution.
+ Under such hypothesis the population balance equation can be conveniently
+ solved through the Standard Method of Moments by considering only the moments
+ of order zero 
+\begin_inset Formula $m_{0}$
+\end_inset
+
+ and three 
+\begin_inset Formula $m_{3}$
+\end_inset
+
+ (if particle size is chosen as the internal coordinate), which are directly
+ related to soot particle number density and soot volume fraction.
+ This approach is used for predicting soot formation in turbulent flames.
+ A more accurate approach, which removes the restrictive hypothesis of mono
+ dispersed particle size distribution is based on the Direct Quadrature
+ Method of Moments (DQMOM).
+\end_layout
+
+\begin_layout Standard
+Two additional transport equations are solved in a CFD code to predict soot
+ formation and evolution: the first equation accounts for the transport
+ of particle number density 
+\begin_inset Formula $m_{0}$
+\end_inset
+
+ (which is the moment of zero order of the particle size distribution);
+ the second equation describes the transport of the soot volume fraction
+ 
+\begin_inset Formula $f_{V}$
+\end_inset
+
+ (which is related to the moment of order three of the particle size distributio
+n).
+ The particles are assumed to be spherical and the size distribution simply
+ represented by an average diameter 
+\begin_inset Formula $d_{P}$
+\end_inset
+
+.
+ In other words, the particle size distribution becomes a simple Dirac delta
+ function, centered on the average diameter.
+ As a consequence:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+m_{3}=\int_{0}^{\infty}L^{3}n\left(L\right)dL=\int_{0}^{\infty}L^{3}\delta\left(L-d_{P}\right)dL=d_{P}^{3}\label{eq:moments_eq}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+From the hypothesis of spherical shape it is relatively easy to obtain the
+ relation between the soot volume fraction 
+\begin_inset Formula $f_{V}$
+\end_inset
+
+ and the moment of order three:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+\omega_{soot}=\frac{\pi}{6}\int_{0}^{\infty}L^{3}n\left(L\right)dL=\frac{\pi}{6}m_{3}\label{eq:moments_eq}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Therefore a transport equation for the soot volume fraction is perfectly
+ equivalent to a transport equation for the moment 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
+\color none
+
+\begin_inset Formula $m_{3}$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\noun default
+\color inherit
+ of the particle size distribution.
+ The relation between the soot volume fraction and the particle diameter
+ is explicitly reported below for convenience:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+d_{P}=\sqrt[3]{\frac{6}{\pi}\frac{f_{V}}{m_{0}}}\label{eq:moments_eq}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For numerical convenience two density weighted variables are introduced:
+ 
+\begin_inset Formula $\phi_{N}$
+\end_inset
+
+ for the particle density and 
+\begin_inset Formula $\phi_{M}$
+\end_inset
+
+ for the soot mass fraction 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Brookes1999"
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+\phi_{N}=\frac{m_{0}}{\rho N_{AV}}\label{eq:moments_eq}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+\phi_{M}=\frac{\rho_{soot}f_{V}}{\rho}\label{eq:moments_eq}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The transport equations for these variables are given by:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+\overline{\rho}\frac{\partial\widetilde{\phi_{N}}\left(\mathbf{x};t\right)}{\partial t}+\overline{\rho}\widetilde{u_{i}}\frac{\partial\widetilde{\phi_{N}}}{\partial x_{i}}=\frac{\partial}{\partial x_{i}}\left[\Gamma_{t}\frac{\partial\widetilde{\phi_{N}}}{\partial x_{i}}\right]+\widetilde{S}_{m_{0}}\label{eq:moment_transport_equation}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+\overline{\rho}\frac{\partial\widetilde{\phi_{M}}\left(\mathbf{x};t\right)}{\partial t}+\overline{\rho}\widetilde{u_{i}}\frac{\partial\widetilde{\phi_{M}}}{\partial x_{i}}=\frac{\partial}{\partial x_{i}}\left[\Gamma_{t}\frac{\partial\widetilde{\phi_{M}}}{\partial x_{i}}\right]+\widetilde{S}_{M}\label{eq:moment_transport_equation}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+It is relatively easy to recognize in the variable 
+\begin_inset Formula $\phi_{M}$
+\end_inset
+
+ the soot volume fraction 
+\begin_inset Formula $\omega_{soot}$
+\end_inset
+
+.
+ The source terms can be written as a sum of different contributions:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+\widetilde{S}_{m_{0}}=\widetilde{S}_{m_{0}}^{nucleation}+\widetilde{S}_{m_{0}}^{aggregation}\label{eq:moment_transport_equation}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+\widetilde{S}_{M}=\widetilde{S}_{M}^{nucleation}+\widetilde{S}_{M}^{growth}+\widetilde{S}_{M}^{oxidation}\label{eq:moment_transport_equation}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+It is assumed that the influence of oxidation on the nucleation of soot
+ particles is small and therefore the oxidation term is not included in
+ the first equation 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Syed1990"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+For turbulent flames the effects of turbulent fluctuations should be taken
+ into account in the evaluation of these source terms.
+ The simplest approach, which has been followed by several authors 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Ma2005,Wen2003,Zucca2006"
+
+\end_inset
+
+, solves the transport equations and neglects the effects of turbulence.
+ 
+\end_layout
+
+\begin_layout Section
+Semi-empirical kinetic models 
+\end_layout
+
+\begin_layout Subsection
+Nucleation Rate 
+\end_layout
+
+\begin_layout Standard
+Soot nucleation is described by the so called acetylene-route, which is
+ based on a simple one-step reaction:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+C_{2}H_{2}\rightarrow2C_{soot}+H_{2}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The corresponding source terms are expressed in the usual Arrhenius form:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+S_{m0}^{nucleation}=A_{nucl}e^{-T_{nucl}/T}C_{C2H2}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+S_{M}^{nucleation}=M_{P}S_{m0}^{nucleation}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In the expressions reported above 
+\begin_inset Formula $A_{nucl}$
+\end_inset
+
+ is the frequency factor, 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
+\color none
+
+\begin_inset Formula $T_{nucl}$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\noun default
+\color inherit
+ is the activation temperature, 
+\begin_inset Formula $C_{C2H2}$
+\end_inset
+
+ is the concentration of acetylene and 
+\family roman
+\series medium
+\shape up
+\size normal
+\emph off
+\bar no
+\noun off
+\color none
+
+\begin_inset Formula $M_{P}$
+\end_inset
+
+
+\family default
+\series default
+\shape default
+\size default
+\emph default
+\bar default
+\noun default
+\color inherit
+ is the molecular weight of soot primary particles.
+\end_layout
+
+\begin_layout Standard
+The user can choose between several semi-empirical constants for kinetic
+ parameters reaction rates reported above.
+ They are summarized in Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Kinetic-nucleation"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="7" columns="2">
+<features>
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Name
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Reference
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family sans
+Liu_2001
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Liu2006a"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family sans
+Liu_2002
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Liu2002"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family sans
+Moss_1999
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Brookes1999"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family sans
+Wen_2003
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Wen2003"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family sans
+Lindstedt_1994
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Yeoh2009"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family sans
+Leung_1991
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Yeoh2009"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Kinetic parameters for nucleation model
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Kinetic-nucleation"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Growth Rate 
+\end_layout
+
+\begin_layout Standard
+According to Frenklach et al.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Frencklach1984"
+
+\end_inset
+
+, the soot particle growth is determined by the addition of acetylene and
+ on the number of active sites on the surface.
+ Assuming a mono-dispersed spherical particle distribution, the soot specific
+ surface area can be expressed as a function of the soot particle number
+ density 
+\begin_inset Formula $m_{0}$
+\end_inset
+
+ and to the soot volume fraction 
+\begin_inset Formula $f_{V}$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+A_{soot}=\left(36\pi\right)^{1/3}m_{0}^{1/3}f_{V}^{2/3}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The surface growth rate is given by:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+S_{m0}^{growth}=A_{growth}e^{-T_{growth}/T}C_{C2H2}f\left(A_{soot}\right)\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A range of area dependencies have been proposed in the literature; according
+ to the most common approaches the function 
+\begin_inset Formula $f$
+\end_inset
+
+ is assumed linearly proportional to the soot specific surface area 
+\begin_inset Formula $f=A_{soot}$
+\end_inset
+
+ or to square root surface area 
+\begin_inset Formula $f=\sqrt{A_{soot}}$
+\end_inset
+
+.
+ Although the square-root dependence of the soot surface area does not seem
+ physically correct, it can be related to the surface aging phenomena and
+ active-site surface deactivation 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Liu2006a"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Available growth models are summarized in Table 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "tab:Kinetic-growth"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="7" columns="3">
+<features>
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<column alignment="center" valignment="top" width="0">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Name
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Area function
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Reference
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family sans
+Liu_2001
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $f=A_{soot}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Liu2006a"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family sans
+Liu_2002
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $f=\sqrt{A_{soot}}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Liu2002"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family sans
+Moss_1999
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $f=A_{soot}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Brookes1999"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family sans
+Wen_2003
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $f=A_{soot}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Wen2003"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family sans
+Lindstedt_1994
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $f=A_{soot}$
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Yeoh2009"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\family sans
+Leung_1991
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $f=\sqrt{A_{soot}}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Yeoh2009"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Kinetic parameters for growth model
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Kinetic-growth"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Coagulation Rate 
+\end_layout
+
+\begin_layout Standard
+The coagulation rate depends on soot particles density; assuming a mono-disperse
+d distribution of spherical particles: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+S_{m0}^{aggregation}=\beta m_{0}^{2}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+According to Brookes and Moss 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Brookes1999"
+
+\end_inset
+
+ and Syed et al.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Syed1990"
+
+\end_inset
+
+, 
+\begin_inset Formula $\beta$
+\end_inset
+
+ is related to the temperature: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+\beta=\frac{A_{aggregation}}{N_{AV}^{2}}\sqrt{T}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $A_{coagulation}$
+\end_inset
+
+ is a semi-empirical constant.
+ The value proposed by Brookes and Moss 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Brookes1999"
+
+\end_inset
+
+ is used.
+\end_layout
+
+\begin_layout Subsection
+Oxidation Rate
+\end_layout
+
+\begin_layout Standard
+The oxidation rate strongly depends on the hydroxyl radical (OH) and O2
+ but also O radical can play an important role.
+ The rate of oxidation is usually assumed proportional to the soot specific
+ surface area:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+S_{m0}^{oxidation}=\dot{m}_{ox}A_{soot}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Lee model
+\end_layout
+
+\begin_layout Standard
+The model of Lee et al.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Lee1962"
+
+\end_inset
+
+ can be adopted and soot oxidation is described using a one-step reaction:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+C_{soot}+\frac{1}{2}O_{2}\rightarrow CO\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The soot oxidation term takes the form:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+\dot{m}_{ox}=A_{ox}e^{-T_{ox}/T}\frac{p_{O2}}{\sqrt{T}}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This model was also used by Liu et al.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Liu2006"
+
+\end_inset
+
+, Wen et al.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Wen2003"
+
+\end_inset
+
+ and Ma et al.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Ma2005"
+
+\end_inset
+
+ and implicitly assumes that soot oxidation in a diffusion flame is controlled
+ by 
+\begin_inset Formula $O_{2}$
+\end_inset
+
+ into the zone of active soot oxidation at temperatures high enough to react
+ with 
+\begin_inset Formula $H$
+\end_inset
+
+ and form 
+\begin_inset Formula $OH$
+\end_inset
+
+, which is recognized as the main oxidizing species in the stoichiometric/lean
+ side of the flame.
+ On the contrary, 
+\begin_inset Formula $O_{2}$
+\end_inset
+
+ becomes more important as any surviving particles enter oxygen-rich regions
+ where temperature is still high 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "D'Anna2006"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection*
+NSC model
+\end_layout
+
+\begin_layout Standard
+The model of proposed by Nagle and Strickland-Constable 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Nagle1962"
+
+\end_inset
+
+ assumes that the reaction rate is given by the following expression:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+\dot{m}_{ox}=120\left[\frac{k_{A}P_{O2}}{1+k_{Z}P_{O2}}\chi+k_{B}P_{O2}\left(1-\chi\right)\right]\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where:
+\begin_inset Formula \begin{equation}
+\chi=\frac{1}{1+\frac{k_{T}}{k_{B}P_{O2}}}\dot{m}_{ox}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The kinetic constants 
+\begin_inset Formula $k_{A}$
+\end_inset
+
+, 
+\begin_inset Formula $k_{B}$
+\end_inset
+
+, 
+\begin_inset Formula $k_{T}$
+\end_inset
+
+ and 
+\begin_inset Formula $k_{Z}$
+\end_inset
+
+ can be found in 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Nagle1962,Yeoh2009"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Closure of soot source terms
+\end_layout
+
+\begin_layout Standard
+One of the major issues in the modeling of soot formation is the closure
+ of the soot source terms in the conservation equations for soot particle
+ number density 
+\begin_inset Formula $m_{0}$
+\end_inset
+
+ and soot volume fraction 
+\begin_inset Formula $f_{V}$
+\end_inset
+
+.
+ In general the mean source term can be expressed using the proper joint-PDF
+ 
+\begin_inset Formula $P\left(Z,\chi_{st},\phi_{H},m_{0},f_{V}\right)$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+\widetilde{S}=\int_{0}^{\infty}\int_{0}^{\infty}\int_{-\infty}^{\infty}\int_{0}^{\infty}\int_{0}^{1}S\left(Z,\chi_{st},\phi_{H},m_{0},f_{V}\right)P\left(Z,\chi_{st},\phi_{H},m_{0},f_{V}\right)dZ\cdot d\chi_{st}\cdot d\phi_{H}\cdot dm_{0}\cdot df_{v}\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The form of this joint-PDF is unknown, both experimentally and theoretically,
+ and therefore simplified approaches must be used in order to obtain the
+ closure of the source term.
+\end_layout
+
+\begin_layout Subsection
+Mean Properties
+\end_layout
+
+\begin_layout Standard
+The simplest approach consists in evaluating the source term using the mean
+ flame properties and totally ignoring the effects of turbulence 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Brookes1999"
+
+\end_inset
+
+.
+ In this case the joint-PDF can be split in the product of five PDFs of
+ a single variable:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+P\left(Z,\chi_{st},\phi_{H},m_{0},f_{V}\right)\approx P\left(Z\right)P\left(\chi_{st}\right)P\left(\phi_{H}\right)P\left(m_{0}\right)P\left(f_{V}\right)\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Moreover each PDF simply becomes a Dirac delta function centered on the
+ mean value of each independent variable:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+P\left(Z,\chi_{st},\phi_{H},m_{0},f_{V}\right)\approx\delta\left(Z-\widetilde{Z}\right)\delta\left(\chi_{st}-\widetilde{\chi_{st}}\right)\delta\left(\phi_{H}-\widetilde{\phi_{H}}\right)\delta\left(m_{0}-\widetilde{m_{0}}\right)\delta\left(f_{V}-\widetilde{f_{V}}\right)\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Uncorrelated closure 
+\end_layout
+
+\begin_layout Standard
+A different solution assumes that mixture fraction and enthalpy defect are
+ completely uncorrelated with soot properties (
+\begin_inset Formula $m_{0}$
+\end_inset
+
+ and 
+\begin_inset Formula $f_{V}$
+\end_inset
+
+).
+ This solution was adopted by many authors 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Bai1998,Brookes1999,Roditcheva2001"
+
+\end_inset
+
+ and assumes that the influence of scalar fluctuations in the gas phase
+ are dominant.
+ The joint- PDF can be split in the product of two different PDFs:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+P\left(Z,\chi_{st},\phi_{H},m_{0},f_{V}\right)\approx P\left(Z,\chi_{st},\phi_{H}\right)P\left(m_{0},f_{V}\right)\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Moreover, the soot properties are also assumed statistically independent:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+P\left(Z,\chi_{st},\phi_{H},m_{0},f_{V}\right)\approx P\left(Z,\chi_{st},\phi_{H}\right)P\left(m_{0}\right)P\left(f_{V}\right)\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The single PDF for the soot volume fraction is unknown.
+ Two Dirac delta functions can be used to obtain the closure.
+ The final form of the joint-PDF is therefore the following:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula \begin{equation}
+P\left(Z,\chi_{st},\phi_{H},m_{0},f_{V}\right)\approx P\left(Z,\chi_{st},\phi_{H}\right)\delta\left(m_{0}-\widetilde{m_{0}}\right)\delta\left(f_{V}-\widetilde{f_{V}}\right)\end{equation}
+
+\end_inset
+
+
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "/home/cuoci/OpenFOAM/libOpenSMOKE/doc/bilbio"
+options "siam"
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

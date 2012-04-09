@@ -1,0 +1,3 @@
+include $(Flamelets)/OpenSMOKE_PDF_NonAdiabaticFlamelet_Library.dep
+include $(Flamelets)/OpenSMOKE_PDF_Flamelet_Library.dep
+include $(Flamelets)/OpenSMOKE_PDF_Flamelet.dep

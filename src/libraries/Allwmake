@@ -1,0 +1,9 @@
+#!/bin/sh
+set -x
+
+wmake libso common
+wmake libso flamelets
+wmake libso twoequations
+wmake libso qmom
+wmake libso pdfThermo
+

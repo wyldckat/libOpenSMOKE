@@ -1,0 +1,5 @@
+OBJECTS = \
+$(OBJECTS_DIR)/OpenSMOKE_SootEmpiricalModels.o\
+$(OBJECTS_DIR)/OpenSMOKE_SootSourceTermFlamelet.o\
+$(OBJECTS_DIR)/OpenSMOKE_SootSourceTermFlameletLibrary.o\
+$(OBJECTS_DIR)/OpenSMOKE_SootSourceTermLibrary.o

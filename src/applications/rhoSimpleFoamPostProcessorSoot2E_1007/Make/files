@@ -1,0 +1,4 @@
+rhoSimpleFoamPostProcessorSoot2E.C
+
+
+EXE = $(FOAM_USER_APPBIN)/rhoSimpleFoamPostProcessorSoot2E_1007
