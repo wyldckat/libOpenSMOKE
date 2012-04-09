@@ -3,7 +3,7 @@ EXE_INC = \
     -I$(LIB_SRC)/thermophysicalModels/specie/lnInclude \
     -I$(LIB_SRC)/thermophysicalModels/basic/lnInclude \
     -I$(realpath ../common/lnInclude) \
-    -I$(realpath ../flamelets/lnInclude \
+    -I$(realpath ../flamelets/lnInclude) \
     -I$(realpath ../qmom/lnInclude) \
     -I$(realpath ../twoequations/lnInclude) \
     -I$(GSL_INST_DIR)/include 
