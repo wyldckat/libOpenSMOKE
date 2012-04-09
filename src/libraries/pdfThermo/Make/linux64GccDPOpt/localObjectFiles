@@ -1,4 +1,0 @@
-LOCAL_OBJECTS = \
-basicPdfThermo.o\
-newBasicPdfThermo.o\
-hPdfThermos.o

@@ -1,8 +1,0 @@
-$(OBJECTS_DIR)/OpenSMOKE_ChiDistribution.o: src/OpenSMOKE_ChiDistribution.dep
-src/OpenSMOKE_ChiDistribution.dep: src/OpenSMOKE_ChiDistribution.cpp
-src/OpenSMOKE_ChiDistribution.dep: src/OpenSMOKE_ChiDistribution.hpp
-src/OpenSMOKE_ChiDistribution.dep: src/OpenSMOKE_External_Functions.hpp
-$(OBJECTS_DIR)/OpenSMOKE_ChiDistribution.o: $(EXE_DEP)
-$(OBJECTS_DIR)/OpenSMOKE_ChiDistribution.o:
-	@SOURCE_DIR=src
-	SOURCE=src/OpenSMOKE_ChiDistribution.cpp ; $(cpptoo)

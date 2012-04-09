@@ -1,5 +1,0 @@
-DEPENDENCIES = \
-$(TwoEquations)/OpenSMOKE_SootEmpiricalModels.dep\
-$(TwoEquations)/OpenSMOKE_SootSourceTermFlamelet.dep\
-$(TwoEquations)/OpenSMOKE_SootSourceTermFlameletLibrary.dep\
-$(TwoEquations)/OpenSMOKE_SootSourceTermLibrary.dep

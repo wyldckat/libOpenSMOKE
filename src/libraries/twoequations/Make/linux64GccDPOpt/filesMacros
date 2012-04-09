@@ -1,2 +1,0 @@
-TwoEquations 	= src
-LIB = $(FOAM_INST_DIR)/libOpenSMOKE/lib/libOpenSMOKE_twoequations

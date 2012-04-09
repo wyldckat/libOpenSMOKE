@@ -1,7 +1,0 @@
-$(OBJECTS_DIR)/OpenSMOKE_PDF_Flamelet.o: src/OpenSMOKE_PDF_Flamelet.dep
-src/OpenSMOKE_PDF_Flamelet.dep: src/OpenSMOKE_PDF_Flamelet.cpp
-src/OpenSMOKE_PDF_Flamelet.dep: src/OpenSMOKE_PDF_Flamelet.hpp
-$(OBJECTS_DIR)/OpenSMOKE_PDF_Flamelet.o: $(EXE_DEP)
-$(OBJECTS_DIR)/OpenSMOKE_PDF_Flamelet.o:
-	@SOURCE_DIR=src
-	SOURCE=src/OpenSMOKE_PDF_Flamelet.cpp ; $(cpptoo)

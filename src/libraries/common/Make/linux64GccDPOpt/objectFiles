@@ -1,3 +1,0 @@
-OBJECTS = \
-$(OBJECTS_DIR)/OpenSMOKE_ChiDistribution.o\
-$(OBJECTS_DIR)/OpenSMOKE_External_Functions.o

@@ -1,5 +1,0 @@
-LOCAL_OBJECTS = \
-OpenSMOKE_SootEmpiricalModels.o\
-OpenSMOKE_SootSourceTermFlamelet.o\
-OpenSMOKE_SootSourceTermFlameletLibrary.o\
-OpenSMOKE_SootSourceTermLibrary.o

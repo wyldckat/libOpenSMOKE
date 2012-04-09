@@ -1,2 +1,0 @@
-include $(Common)/OpenSMOKE_ChiDistribution.dep
-include $(Common)/OpenSMOKE_External_Functions.dep

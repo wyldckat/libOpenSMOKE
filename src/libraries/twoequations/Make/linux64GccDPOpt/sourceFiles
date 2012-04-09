@@ -1,5 +1,0 @@
-SOURCE = \
-$(TwoEquations)/OpenSMOKE_SootEmpiricalModels.cpp\
-$(TwoEquations)/OpenSMOKE_SootSourceTermFlamelet.cpp\
-$(TwoEquations)/OpenSMOKE_SootSourceTermFlameletLibrary.cpp\
-$(TwoEquations)/OpenSMOKE_SootSourceTermLibrary.cpp

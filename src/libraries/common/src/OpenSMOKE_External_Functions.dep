@@ -1,7 +1,0 @@
-$(OBJECTS_DIR)/OpenSMOKE_External_Functions.o: src/OpenSMOKE_External_Functions.dep
-src/OpenSMOKE_External_Functions.dep: src/OpenSMOKE_External_Functions.cpp
-src/OpenSMOKE_External_Functions.dep: src/OpenSMOKE_External_Functions.hpp
-$(OBJECTS_DIR)/OpenSMOKE_External_Functions.o: $(EXE_DEP)
-$(OBJECTS_DIR)/OpenSMOKE_External_Functions.o:
-	@SOURCE_DIR=src
-	SOURCE=src/OpenSMOKE_External_Functions.cpp ; $(cpptoo)

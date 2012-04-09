@@ -1,2 +1,0 @@
-include $(QMOM)/OpenSMOKE_QMOM_EmpiricalModels.dep
-include $(QMOM)/OpenSMOKE_QMOM_GordonAlgorithm.dep

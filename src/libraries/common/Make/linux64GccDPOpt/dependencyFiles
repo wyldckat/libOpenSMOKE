@@ -1,3 +1,0 @@
-DEPENDENCIES = \
-$(Common)/OpenSMOKE_ChiDistribution.dep\
-$(Common)/OpenSMOKE_External_Functions.dep

@@ -1,3 +1,0 @@
-LOCAL_OBJECTS = \
-OpenSMOKE_QMOM_EmpiricalModels.o\
-OpenSMOKE_QMOM_GordonAlgorithm.o
