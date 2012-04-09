@@ -5,3 +5,6 @@ To use this:
   git clone https://github.com/wyldckat/libOpenSMOKE.git
   cd libOpenSMOKE
   ./Allwmake
+
+Notes:
+* The files on the folder "utilities/exe" are static binaries. I don't know where the original source code is.
