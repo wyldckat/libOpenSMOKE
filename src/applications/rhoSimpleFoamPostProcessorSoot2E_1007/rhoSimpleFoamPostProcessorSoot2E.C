@@ -36,6 +36,8 @@ Description
 #include "fvCFD.H"
 #include "fixedGradientFvPatchFields.H"
 
+#include "simpleControl.H"
+
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 void ErrorMessage(const Foam::string message);
 
@@ -49,6 +51,8 @@ int main(int argc, char *argv[])
 #   include "sootTwoEquationsOptions.H"
 #   include "initContinuityErrs.H"
 
+    simpleControl simple(mesh);
+
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
     Info<< "\nStarting time loop\n" << endl;
@@ -56,8 +60,6 @@ int main(int argc, char *argv[])
     for (runTime++; !runTime.end(); runTime++)
     {
         Info<< "Time = " << runTime.timeName() << nl << endl;
-
-#       include "readSIMPLEControls.H"
 
         // Pressure-velocity SIMPLE corrector
         {

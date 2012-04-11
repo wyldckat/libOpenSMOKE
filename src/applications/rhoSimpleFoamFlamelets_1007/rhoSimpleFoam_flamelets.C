@@ -34,8 +34,7 @@ Description
 #include "hPdfThermo.H"
 #include "RASModel.H"
 #include "fixedGradientFvPatchFields.H"
-
-
+#include "simpleControl.H"
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
@@ -49,17 +48,15 @@ int main(int argc, char *argv[])
 #   include "initContinuityErrs.H"
 #   include "readMassFlowProperties.H"
 
+    simpleControl simple(mesh);
 
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
     Info<< "\nStarting time loop\n" << endl;
 
-    for (runTime++; !runTime.end(); runTime++)
+    while (simple.loop())
     {
         Info<< "Time = " << runTime.timeName() << nl << endl;
-
-#       include "readSIMPLEControls.H"
-#       include "initConvergenceCheck.H"
 
         p.storePrevIter();
         rho.storePrevIter();
@@ -82,8 +79,6 @@ int main(int argc, char *argv[])
         Info<< "ExecutionTime = " << runTime.elapsedCpuTime() << " s"
             << "  ClockTime = " << runTime.elapsedClockTime() << " s"
             << nl << endl;
-
-#       include "convergenceCheck.H"
     }
 
     Info<< "End\n" << endl;

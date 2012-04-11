@@ -6,7 +6,7 @@ UEqn.clear();
 phi = fvc::interpolate(rho*U) & mesh.Sf();
 bool closedVolume = adjustPhi(phi, U, p);
 
-for (int nonOrth=0; nonOrth<=nNonOrthCorr; nonOrth++)
+for (int nonOrth=0; nonOrth<=simple.nNonOrthCorr(); nonOrth++)
 {
     fvScalarMatrix pEqn
     (
@@ -14,18 +14,10 @@ for (int nonOrth=0; nonOrth<=nNonOrthCorr; nonOrth++)
     );
 
     pEqn.setReference(pRefCell, pRefValue);
-    // retain the residual from the first iteration
-    if (nonOrth == 0)
-    {
-        eqnResidual = pEqn.solve().initialResidual();
-        maxResidual = max(eqnResidual, maxResidual);
-    }
-    else
-    {
-        pEqn.solve();
-    }
 
-    if (nonOrth == nNonOrthCorr)
+    pEqn.solve();
+
+    if (nonOrth == simple.nNonOrthCorr())
     {
         phi -= pEqn.flux();
     }
