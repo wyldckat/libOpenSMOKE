@@ -1,9 +1,16 @@
 Original source code retrieved from: http://creckmodeling.chem.polimi.it/openfoam.html
 
-To use this:
+To use the build with OpenFOAM 1.7.x (maybe works with 1.7.0 and 1.7.1), simply run:
 
   git clone https://github.com/wyldckat/libOpenSMOKE.git
   cd libOpenSMOKE
+  ./Allwmake
+
+To build with OpenFOAM 2.0.x or 2.1.x or above, before running "Allwmake", check which versions exist by running:
+  git branch -a
+
+For example, if it shows "remotes/origin/v2.0.x", then run these steps:
+  git checkout v2.0.x
   ./Allwmake
 
 Notes:
