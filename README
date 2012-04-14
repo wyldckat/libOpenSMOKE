@@ -1,4 +1,5 @@
 Original source code retrieved from: http://creckmodeling.chem.polimi.it/openfoam.html
+A bit more information about these modifications: http://www.cfd-online.com/Forums/blogs/wyldckat/1280-libopensmoke-making-work-once-again-openfoam.html
 
 To use the build with OpenFOAM 1.7.x (maybe works with 1.7.0 and 1.7.1), simply run:
 
