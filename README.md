@@ -1,16 +1,22 @@
 # Introduction
 
 Original source code retrieved from: http://creckmodeling.chem.polimi.it/openfoam.html
+
 A bit more information about these modifications: http://www.cfd-online.com/Forums/blogs/wyldckat/1280-libopensmoke-making-work-once-again-openfoam.html
 
 # Installation
 ## Prerequisites
 Firstly, you need the GNU Scientific Library:
-* On Ubuntu, install GSL by simply running:
-    sudo apt-get install gsl-bin libgsl0-dev
-* To build your own GSL, read the section "Compilation and Installation" on the [/doc/UserGuide.pdf](/doc/UserGuide.pdf "User Guide") document.
-** Keep in mind that after you build your own GSL, doing `git clone` and before running `Allwmake`, edit that file `Allwmake` and change the path `$HOME/gsl` to your own installation path of GSL:
-    export GSL_INST_DIR="$HOME/gsl"
+
+*   On Ubuntu, install GSL by simply running:
+
+        sudo apt-get install gsl-bin libgsl0-dev
+
+*   To build your own GSL, read the section "Compilation and Installation" on the [/doc/UserGuide.pdf](/doc/UserGuide.pdf "User Guide") document.
+
+    Keep in mind that after you build your own GSL, doing `git clone` and before running `Allwmake`, edit that file `Allwmake` and change the path `$HOME/gsl` to your own installation path of GSL:
+
+        export GSL_INST_DIR="$HOME/gsl"
 
 ## Installing `libOpenSMOKE`
 To use the build with OpenFOAM 1.7.x (maybe works with 1.7.0 and 1.7.1), simply run:
@@ -29,6 +35,7 @@ For example, if it shows `remotes/origin/v2.0.x`, then run these steps:
     ./Allwmake
 
 The binaries will be installed in your own user folders, so please DO NOT INSTALL AS ROOT! To find out which are your own user folders for binaries, run the following commands:
+
     echo $FOAM_USER_LIBBIN
     echo $FOAM_USER_APPBIN
 
