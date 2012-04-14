@@ -12,7 +12,7 @@ Firstly, you need the GNU Scientific Library:
 
         sudo apt-get install gsl-bin libgsl0-dev
 
-*   To build your own GSL, read the section "Compilation and Installation" on the [/doc/UserGuide.pdf](./doc/UserGuide.pdf "User Guide") document.
+*   To build your own GSL, read the section "Compilation and Installation" on the [/doc/UserGuide.pdf](./libOpenSMOKE/doc/UserGuide.pdf "User Guide") document.
 
     Keep in mind that after you build your own GSL, doing `git clone` and before running `Allwmake`, edit that file `Allwmake` and change the path `$HOME/gsl` to your own installation path of GSL:
 
