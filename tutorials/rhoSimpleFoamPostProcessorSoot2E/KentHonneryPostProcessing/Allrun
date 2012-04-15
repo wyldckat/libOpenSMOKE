@@ -1,0 +1,18 @@
+#/bin/sh
+cd ${0%/*} || exit 1    # run from this directory
+
+# Source tutorial run functions
+. $WM_PROJECT_DIR/bin/tools/RunFunctions
+
+echo "Run a copy of the tutorial KentHonnery..."
+cd ..
+cp -r -n ../rhoSimpleFoamFlamelets/KentHonnery KentHonnery
+cd KentHonnery
+./Allrun
+
+echo "Now for the post-processing, copy the missing files to the copied case..."
+cd ..
+cp -r -n KentHonneryPostProcessing/* KentHonnery/
+cd KentHonnery
+echo "And do the pos-processing case."
+runApplication rhoSimpleFoamPostProcessorSoot2E_1007
