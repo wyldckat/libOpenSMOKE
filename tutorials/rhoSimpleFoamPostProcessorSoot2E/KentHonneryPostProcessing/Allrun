@@ -14,5 +14,9 @@ echo "Now for the post-processing, copy the missing files to the copied case..."
 cd ..
 cp -r -n KentHonneryPostProcessing/* KentHonnery/
 cd KentHonnery
+
+echo "Apply a hack for making the postprocessor begin working..."
+echo 'libs ("libcompressibleRASModels.so");' >> system/controlDict
+
 echo "And do the pos-processing case."
 runApplication rhoSimpleFoamPostProcessorSoot2E_1007
