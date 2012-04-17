@@ -13,6 +13,10 @@ cd KentHonnery
 echo "Now for the post-processing, copy the missing files to the copied case..."
 cd ..
 cp -r -n KentHonneryPostProcessing/* KentHonnery/
+#forcefully copy fvSchemes and fvSolution as well, given the changes in the post-processor.
+cp KentHonneryPostProcessing/system/fv* KentHonnery/system/
+
+#now go back into the case being solved...
 cd KentHonnery
 
 echo "Apply a hack for making the postprocessor begin working..."
