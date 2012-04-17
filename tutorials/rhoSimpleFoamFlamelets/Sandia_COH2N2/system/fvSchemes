@@ -43,8 +43,7 @@ divSchemes
     div(phi,H) 					Gauss limitedLinear 1;
     div(phi,csi)   				Gauss limitedLinear01 1.00;
     div(phi,csiv2)  				Gauss limitedLinear01 0.25;
-    div((muEff*dev2(grad(U).T()))) 		Gauss linear;
-
+    div((muEff*dev2(T(grad(U)))))               Gauss linear;
 }
 
 laplacianSchemes

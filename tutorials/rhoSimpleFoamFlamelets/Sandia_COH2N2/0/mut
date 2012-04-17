@@ -42,7 +42,7 @@ boundaryField
     }
     leftside
     {
-        type            mutWallFunction;
+        type            mutkWallFunction;
         Cmu             0.09;
         kappa           0.41;
         E               9.8;
@@ -50,7 +50,7 @@ boundaryField
     }
     burnerwall
     {
-        type            mutWallFunction;
+        type            mutkWallFunction;
         Cmu             0.09;
         kappa           0.41;
         E               9.8;
