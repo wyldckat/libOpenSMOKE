@@ -20,7 +20,7 @@ cp KentHonneryPostProcessing/system/fv* KentHonnery/system/
 cd KentHonnery
 
 echo "Apply a hack for running the postprocessor..."
-runApplication changeDictionary -dict changeDictionaryDict.controlDict -instance system
+runApplication changeDictionary -dict system/changeDictionaryDict.controlDict -instance system
 
 echo "And do the pos-processing case."
 runApplication rhoSimpleFoamPostProcessorSoot2E_1007
