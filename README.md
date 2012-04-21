@@ -18,6 +18,15 @@ Firstly, you need the GNU Scientific Library:
 
         export GSL_INST_DIR="$HOME/gsl"
 
+*   In case you want to build applications and libraries based on `libOpenSMOKE`, without running `Allwmake`, then you need to add to your `~/.bashrc` one of the following lines:
+
+        export GSL_INST_DIR="$HOME/gsl"
+        alias gsl4smo='export GSL_INST_DIR="$HOME/gsl"'
+
+    If you choose the second line, then every time you start a new terminal and build libOpenSMOKE applications, then you'll have to run the command:
+
+        gsl4smo
+
 ## Installing `libOpenSMOKE`
 To use the build with OpenFOAM 1.7.x (maybe works with 1.7.0 and 1.7.1), simply run:
 
@@ -25,7 +34,7 @@ To use the build with OpenFOAM 1.7.x (maybe works with 1.7.0 and 1.7.1), simply 
     cd libOpenSMOKE
     ./Allwmake
 
-To build with OpenFOAM 2.0.x or 2.1.x or above, before running "Allwmake", check which versions exist by running:
+To build with OpenFOAM 2.0.x or 2.1.x or above, before running `Allwmake`, check which versions exist by running:
 
     git branch -a
 
@@ -40,4 +49,4 @@ The binaries will be installed in your own user folders, so please DO NOT INSTAL
     echo $FOAM_USER_APPBIN
 
 # Notes
-* The files on the folder "utilities/exe" are static binaries. I don't know where the original source code is, so you better ask the authors at http://creckmodeling.chem.polimi.it/openfoam.html
+* The files on the folder `utilities/exe` are static binaries. I don't know where the original source code is, so you better ask the authors at http://creckmodeling.chem.polimi.it/openfoam.html
