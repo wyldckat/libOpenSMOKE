@@ -1,27 +1,19 @@
-/*---------------------------------------------------------------------------*\
+/*--------------------------------*- C++ -*----------------------------------*\
 | =========                 |                                                 |
 | \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
-|  \\    /   O peration     | Version:  1.0                                   |
-|   \\  /    A nd           | Web:      http://www.openfoam.org               |
+|  \\    /   O peration     | Version:  2.1.x                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
 |    \\/     M anipulation  |                                                 |
 \*---------------------------------------------------------------------------*/
-
 FoamFile
 {
-    version         2.0;
-    format          ascii;
-
-    root            "";
-    case            "";
-    instance        "";
-    local           "";
-
-    class           volScalarField;
-    object          csi;
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    location    "0";
+    object      csi;
 }
-
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
-
 
 dimensions      [0 0 0 0 0 0 0];
 
@@ -31,16 +23,17 @@ boundaryField
 {
     inletfuel           
     {
-		type fixedValue;
+	type		fixedValue;
         value           uniform 1;
     }
+
     inletair           
     {
-		type fixedValue;
+	type 		fixedValue;
         value           uniform 0;
     }
 
-        outlet          
+    outlet          
     {
         type            zeroGradient;
     }
@@ -64,6 +57,7 @@ boundaryField
     {
         type            wedge;
     }
+
     axis
     {
         type            empty;

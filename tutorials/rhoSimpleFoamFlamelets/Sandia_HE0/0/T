@@ -1,27 +1,19 @@
-/*---------------------------------------------------------------------------*\
+/*--------------------------------*- C++ -*----------------------------------*\
 | =========                 |                                                 |
 | \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
-|  \\    /   O peration     | Version:  1.0                                   |
-|   \\  /    A nd           | Web:      http://www.openfoam.org               |
+|  \\    /   O peration     | Version:  2.1.x                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
 |    \\/     M anipulation  |                                                 |
 \*---------------------------------------------------------------------------*/
-
 FoamFile
 {
-    version         2.0;
-    format          ascii;
-
-    root            "";
-    case            "";
-    instance        "";
-    local           "";
-
-    class           volScalarField;
-    object          T;
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    location    "0";
+    object      T;
 }
-
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
-
 
 dimensions          [ 0 0 0 1 0 0 0 ];
 
@@ -31,29 +23,29 @@ boundaryField
 {
     inletfuel           
     {
-        type  fixedValue;
- 		value uniform 295;
+        type  		fixedValue;
+ 	value 		uniform 295;
     }
 
     inletair           
     {
-        type  fixedValue;
- 		value uniform 294;
+        type  		fixedValue;
+ 	value 		uniform 294;
     }
 
     outlet          
     {
-        type  zeroGradient;
+        type  		zeroGradient;
     }
 
     leftside       
     {
-        type  zeroGradient;
+        type  		zeroGradient;
     }
 
     burnerwall
     {
-        type  zeroGradient;
+        type  		zeroGradient;
     }
 
     front
@@ -65,6 +57,7 @@ boundaryField
     {
         type            wedge;
     }
+
     axis
     {
         type            empty;
