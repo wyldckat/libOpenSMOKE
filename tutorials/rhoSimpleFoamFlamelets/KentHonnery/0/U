@@ -9,7 +9,7 @@ FoamFile
 {
     version     2.0;
     format      ascii;
-    class       volVecotrField;
+    class       volVectorField;
     location    "0";
     object      U;
 }
