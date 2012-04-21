@@ -19,8 +19,8 @@ cp KentHonneryPostProcessing/system/fv* KentHonnery/system/
 #now go back into the case being solved...
 cd KentHonnery
 
-echo "Apply a hack for making the postprocessor begin working..."
-echo 'libs ("libcompressibleRASModels.so");' >> system/controlDict
+echo "Apply a hack for running the postprocessor..."
+runApplication changeDictionary -instance system
 
 echo "And do the pos-processing case."
 runApplication rhoSimpleFoamPostProcessorSoot2E_1007
