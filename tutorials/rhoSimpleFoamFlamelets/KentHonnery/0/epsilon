@@ -1,14 +1,14 @@
 /*--------------------------------*- C++ -*----------------------------------*\
 | =========                 |                                                 |
 | \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
-|  \\    /   O peration     | Version:  1.7.x                                 |
-|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|  \\    /   O peration     | Version:  2.1.x                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
 |    \\/     M anipulation  |                                                 |
 \*---------------------------------------------------------------------------*/
 FoamFile
 {
     version     2.0;
-    format      binary;
+    format      ascii;
     class       volScalarField;
     location    "0";
     object      epsilon;
@@ -26,39 +26,39 @@ boundaryField
         type            fixedValue;
         value           uniform 22100;
     }
+
     inletair
     {
         type            fixedValue;
         value           uniform 1;
     }
+
     outlet
     {
         type            zeroGradient;
     }
+
     axis
     {
         type            empty;
     }
+
     leftside
     {
-        type            compressible::epsilonWallFunction;
-        Cmu             0.09;
-        kappa           0.41;
-        E               9.8;
-        value           uniform 1;
+        type 		zeroGradient;
     }
+
     burnerwall
     {
         type            compressible::epsilonWallFunction;
-        Cmu             0.09;
-        kappa           0.41;
-        E               9.8;
-        value           uniform 1;
+        value           uniform 0;
     }
+
     front
     {
         type            wedge;
     }
+
     back
     {
         type            wedge;
