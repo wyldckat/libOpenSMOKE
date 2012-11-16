@@ -49,4 +49,29 @@ The binaries will be installed in your own user folders, so please DO NOT INSTAL
     echo $FOAM_USER_APPBIN
 
 # Notes
-* The files on the folder `utilities/exe` are static binaries. I don't know where the original source code is, so you better ask the authors at http://creckmodeling.chem.polimi.it/openfoam.html
+*   The files on the folder `utilities/exe` are static binaries. I don't know where the original source code is, so you better ask the authors at http://creckmodeling.chem.polimi.it/openfoam.html
+
+*   Secondly, those binaries in the folder `utilities/exe` are 64 bit only!! Also known as x86_64. You check if your system is compatible by running:
+
+        uname -m
+
+# Tutorials
+
+The following list are the scripts available in the `tutorials` folder:
+
+    rhoSimpleFoamPostProcessorSoot2E/KentHonneryPostProcessing/Allrun
+    rhoSimpleFoamFlamelets/Sandia_COH2N2/Allrun
+    rhoSimpleFoamFlamelets/Sandia_HE0/Allrun
+    rhoSimpleFoamFlamelets/KentHonnery/Allrun
+    LookUpTable_Assembling/Step01/Run.sh
+    LookUpTable_Assembling/Step02/Run.sh
+
+To run either one of them, go into the folder of where the script is and run it with `./` preppended to the name. For example:
+
+    cd rhoSimpleFoamFlamelets/Sandia_COH2N2
+    ./Allrun
+
+For more information, see:
+*   The user guide available at [doc/UserGuide.pdf](libOpenSMOKE/blob/master/doc/UserGuide.pdf?raw=true "User Guide") document.
+
+*   The thread at [CFD-Online](http://www.cfd-online.com) where this library is being discussed: [libOpenSMOKE in the sub-forum OpenFOAM/Programming & Development](http://www.cfd-online.com/Forums/openfoam-programming-development/99645-libopensmoke.html)
