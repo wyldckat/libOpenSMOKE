@@ -1,12 +1,10 @@
 # Introduction
 
-Original source code retrieved from: http://creckmodeling.chem.polimi.it/openfoam.html
+Original source code retrieved from (the link is broken): http://creckmodeling.chem.polimi.it/openfoam.html - the current version should be here: http://www.opensmoke.polimi.it/
 
 A bit more information about these modifications: http://www.cfd-online.com/Forums/blogs/wyldckat/1280-libopensmoke-making-work-once-again-openfoam.html
 
 ## Notes
-
-*   Their site http://creckmodeling.chem.polimi.it is currently (March 2013) being renewed, so you might be able to get the original source directly from their site. But feel free to use their contact form: http://creckmodeling.chem.polimi.it/index.php/contact-us
 
 *   For using with OpenFOAM 2.2, please check the `flameletModel` variant of libOpenSMOKE by Tobias Holzmann: https://github.com/shor-ty/flameletModel-2.2.x
 
