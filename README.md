@@ -6,7 +6,7 @@ A bit more information about these modifications: http://www.cfd-online.com/Foru
 
 ## Notes
 
-*   For using with OpenFOAM 2.2, please check the `flameletModel` variant of libOpenSMOKE by Tobias Holzmann: https://github.com/shor-ty/flameletModel-2.2.x
+*   For using with OpenFOAM 2.2 and 2.3, please check the `flameletModel` variant of libOpenSMOKE by Tobias Holzmann: https://bitbucket.org/shor-ty/flameletmodel/overview
 
 # Installation
 ## Prerequisites
