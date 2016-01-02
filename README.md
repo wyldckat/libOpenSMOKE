@@ -4,6 +4,9 @@ Original source code retrieved from (the link is broken): http://creckmodeling.c
 
 A bit more information about these modifications: http://www.cfd-online.com/Forums/blogs/wyldckat/1280-libopensmoke-making-work-once-again-openfoam.html
 
+This [git repository](https://github.com/wyldckat/libOpenSMOKE) was brought to you by Bruno Santos (wyldckat@github working at [blueCAPE Lda](http://www.bluecape.com.pt)).
+
+
 ## Notes
 
 *   For using with OpenFOAM 2.2 and 2.3, please check the `flameletModel` variant of libOpenSMOKE by Tobias Holzmann: https://bitbucket.org/shor-ty/flameletmodel/overview
